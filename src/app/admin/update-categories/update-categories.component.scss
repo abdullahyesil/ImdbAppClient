@@ -1,0 +1,28 @@
+.pencere {
+    max-width: 500px; /* Dialog genişliği */
+  }
+  
+  .form-container {
+    padding: 20px; /* Form alanı iç içe geçmişken, içeriği hizalamak için bir boşluk */
+  }
+  
+  .full-width {
+    width: 100%; /* Form alanlarının tam genişliği */
+  }
+  
+  mat-dialog-actions {
+    padding: 10px 20px; /* Dialog eylemlerinin içerikten ve kenarlardan biraz ayrılması */
+    justify-content: flex-end; /* Eylemleri sağ tarafa hizalar */
+  }
+  
+  .mat-dialog-title {
+    background-color: #f0f0f0; /* Dialog başlığının arka plan rengi */
+    padding: 10px 20px; /* Başlık içeriğinden boşluk */
+    border-bottom: 1px solid #ccc; /* Başlık altına ince bir çizgi */
+  }
+  
+  mat-form-field {
+    width: 100%; /* Form alanlarının tam genişliği */
+  }
+
+  

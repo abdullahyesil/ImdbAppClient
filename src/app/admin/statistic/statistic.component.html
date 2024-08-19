@@ -1,0 +1,37 @@
+<div class="container container-statistic m-2">
+    <h2>Üye İstatistikleri</h2>
+    <div class="statistic">
+      <p><strong>Toplam Üye Sayısı:</strong> {{movies?.length || 0}} //filmsayısı </p>
+    </div>
+    <div class="statistic">
+      <p><strong>Toplam Film Sayısı:</strong>  {{movies?.length || 0}} </p>
+    </div>
+    <div class="statistic">
+      <p><strong>Toplam Oy Sayısı:</strong>  {{voteStatistic?.length || 0}} </p>
+    </div>
+  </div>
+
+    <h2 class="text-center">Filmler Tablosu</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Oy Id</th>
+          <th scope="col">Film İsmi</th>
+          <th scope="col">Kullanıcı İsmi</th>
+          <th scope="col">Verdiği Oy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of voteStatistic">
+          <td> {{item.rate_id}}</td>
+          <td>  {{ getFilmName(item.movie_id) }}</td>
+          <td>{{item.user_id === 0 ? 'Ziyaretçi' : item.user_id }}</td>
+          <td>{{ item.rate }}</td>
+        </tr>
+        <!-- <tr *ngIf="voteStatistic.length == 0">
+          <td colspan="4" class="text-center">Listelenecek oy bulunamadı.</td>
+        </tr> -->
+      </tbody>
+    </table>
+
+  

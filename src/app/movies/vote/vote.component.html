@@ -1,0 +1,46 @@
+
+<div class="dialog-container">
+  <div class="header-title"[ngClass]="{
+    'star-layout1': hoveredRating >= 1,
+    'star-layout2': hoveredRating >= 2,
+    'star-layout3': hoveredRating >= 3,
+    'star-layout4': hoveredRating >= 4,
+    'star-layout5': hoveredRating >= 5
+  }" #dialogTitle>
+    <i class="fa fa-star headerStar" [ngClass]="{
+      'larger': hoveredRating >= 1,
+      'larger-more': hoveredRating >= 2,
+      'larger-most': hoveredRating >= 3,
+      'largest': hoveredRating >= 4,
+      'largest-most': hoveredRating >= 5
+    }" aria-hidden="true"></i>
+  </div>
+  <div class="dialog-content">
+    <!-- Dialog içeriği buraya gelebilir -->
+    
+    <mat-dialog-content>       
+      <div class="container">
+          <p>"Film için puanınızı belirlemek için yıldızlardan birine dokunun."</p>
+          <div class="rating">
+            <span class="star" (mouseover)="hoverRating(1)" (mouseleave)="resetHover()" (click)="oyVer(1, rating.movieId)" [ngClass]="{'selected': selectedRating >= 1, 'hovered': hoveredRating >= 1}"><i class="fa fa-star" ></i></span>
+            <span class="star" (mouseover)="hoverRating(2)" (mouseleave)="resetHover()" (click)="oyVer(2, rating.movieId)" [ngClass]="{'selected': selectedRating >= 2, 'hovered': hoveredRating >= 2}"><i class="fa fa-star" ></i></span>
+            <span class="star" (mouseover)="hoverRating(3)" (mouseleave)="resetHover()" (click)="oyVer(3, rating.movieId)" [ngClass]="{'selected': selectedRating >= 3, 'hovered': hoveredRating >= 3}"><i class="fa fa-star" ></i></span>
+            <span class="star" (mouseover)="hoverRating(4)" (mouseleave)="resetHover()" (click)="oyVer(4, rating.movieId)" [ngClass]="{'selected': selectedRating >= 4, 'hovered': hoveredRating >= 4}"><i class="fa fa-star" ></i></span>
+            <span class="star" (mouseover)="hoverRating(5)" (mouseleave)="resetHover()" (click)="oyVer(5, rating.movieId)" [ngClass]="{'selected': selectedRating >= 5, 'hovered': hoveredRating >= 5}"><i class="fa fa-star" ></i></span>
+          </div>
+          <p></p>
+        </div>
+    </mat-dialog-content>
+    <div *ngIf="bilgi" class="alert alert-success">Tebrikler başarıyla oyunuz kullanıldı.</div>
+  
+  
+  
+<mat-dialog-actions>
+  <button class="btn btn-primary" mat-dialog-close>Kapat</button>
+</mat-dialog-actions>
+
+  </div>
+</div>
+
+
+

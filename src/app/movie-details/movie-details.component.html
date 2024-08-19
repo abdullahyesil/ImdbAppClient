@@ -1,0 +1,26 @@
+<div *ngIf="movie else no_movie">
+    <h1>{{movie.movieName}} Film detayları</h1>
+    
+        <div class="card">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{movie.imageUrl}}" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title"> {{movie.movieName}} </h1>
+                        <p class="card-text">
+                            {{movie.description}}
+                        </p>
+    
+                        <b> {{movie.releaseDate |date : "y"}} </b> yılında vizyona girmiştir..
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #no_movie>
+        <div class="alert alert-warning"> Film Bulunamadı</div>
+    </ng-template>

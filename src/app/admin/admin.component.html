@@ -1,0 +1,90 @@
+<div class="container my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menu></app-menu>
+      </div>
+      <div class="col-md-9">
+        <mat-tab-group>
+          <mat-tab label="Hoşgeldiniz">
+            <!-- Section1 -->
+             <div class="container">
+              <div class="logo m-2">
+            <img class="img-fluid img" src="/assets/img/logo.png">
+          </div>
+           <p class="text-center"><b>IMDBApp </b> Uygulamasına hoşgeldiniz. Admin Panelindesiniz.. </p>
+          </div>
+          </mat-tab>
+          <mat-tab label="İstatistikler">
+            <!-- İstatistikler -->
+           <app-statistic></app-statistic>
+          
+          </mat-tab>
+          <mat-tab label="Üyeler">
+           <!-- İstatistikler -->
+              <div class="container">
+                <div class="table-responsive px-4">
+                  <table class="table table-striped bg-white rounded shadow small">
+                    <thead>
+                      <tr>
+                        <th class="py-6 ps-6">
+                          <a class="btn p-0 d-flex align-items-center text-secondary small">
+                            <span class="me-1">İsim</span>
+                           
+                          </a>
+                        </th>
+                        <th class="py-6 ps-6">
+                          <a class="btn p-0 d-flex align-items-center text-secondary small">
+                            <span class="me-1">Mail Adresi</span>
+                           
+                          </a>
+                        </th>
+                        <th class="py-6 ps-6">
+                          <a class="btn p-0 d-flex align-items-center text-secondary small">
+                            <span class="me-1">Şehir</span>
+                            
+                          </a>
+                        </th>
+                        <th class="py-6 ps-6">
+                     
+                      <span class="me-1">Kayıt Tarihi</span>
+                          
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="py-6 ps-6">Ashton Cox</td>
+                        <td class="py-6 ps-6">Technical Author</td>
+                        <td class="py-6 ps-6">San Francisco</td>
+                        <td class="py-6 ps-6">22/04/2021</td>
+                      </tr>
+                      <tr>
+                        <td class="py-6 ps-6">Cedric Kelly</td>
+                        <td class="py-6 ps-6">Javascript Developer</td>
+                        <td class="py-6 ps-6">Edinburgh</td>
+                        <td class="py-6 ps-6">22/04/2021</td>
+                      </tr>
+                      <tr>
+                        <td class="py-6 ps-6">Garrett Winters</td>
+                        <td class="py-6 ps-6">Director</td>
+                        <td class="py-6 ps-6">San Francisco</td>
+                        <td class="py-6 ps-6">22/04/2021</td>
+                      </tr>
+                      <tr>
+                        <td class="py-6 ps-6">Tiger Nixon</td>
+                        <td class="py-6 ps-6">Systen Architect</td>
+                        <td class="py-6 ps-6">San Francisco</td>
+                        <td class="py-6 ps-6">22/04/2021</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+      
+
+        <!-- İstatistikler -->
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+.title {
+    background-color: rgba(128, 128, 128, 0.2); /* Gri renk ve %50 saydamlık */
+    padding: 10px; /* Şerit kalınlığını belirlemek için dolgu */
+    display: block; /* Tüm genişliği kaplayan bir şerit için */
+    width: 100%;
+  }
+  
+  .custom-carousel .carousel-item {
+    height: 500px; /* Yüksekliği ayarlayın */
+  }
+  
+  .custom-carousel .carousel-item img {
+    height: 100%;
+    object-fit: cover; /* Görüntüyü alanın tamamını kaplayacak şekilde ölçekleyin */
+  }
+  
+
+  .story {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .story img {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #d63384;
+    padding: 3px;
+    transition: transform 0.2s;
+  }
+  
+  .story img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .story p {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .label-box {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .label {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, cursor 0.3s ease-in-out;
+
+  }
+  .label:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .label-primary {
+    background-color: #007bff;
+  }
+  
+  .label-secondary {
+    background-color: #6c757d;
+  }
+  
+  .label-success {
+    background-color: #28a745;
+  }
+  
+  .label-danger {
+    background-color: #dc3545;
+  }
+  
+  .label-warning {
+    background-color: #ffc107;
+  }
+
+  .sosyalBaslik{
+    text-align: center !important;
+  }
+
+  .social-icons {
+    display: inline-block;
+  }
+  
+
+
+   /* Temel listeleme stilleri */
+  .custom-label-box {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .custom-label-box b {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* Liste öğeleri arasında boşluk bırakma */
+  .custom-radio-item {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  }
+
+  /* Seçilebilir öğelerin hover stil ayarları */
+  .custom-radio-item:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Seçilen öğenin stil ayarları */
+  .custom-radio-item.checked {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+
+    /* Liste öğeleri arasında boşluk bırakma */
+    .list-group-item2 {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    }
+  
+    /* Seçilebilir öğelerin hover stil ayarları */
+    .list-group-item2:hover {
+      background-color: #f0f0f0;
+    }
+  
+    /* Seçilen öğenin stil ayarları */
+    .list-group-item2.checked {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: white;
+    }

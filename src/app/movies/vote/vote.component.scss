@@ -1,0 +1,105 @@
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.rating {
+  font-size: 30px;
+}
+
+.star {
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.star.selected,
+.star.hovered {
+  color: orange;
+}
+
+.star:hover {
+  color: orange;
+}
+
+.dialog-container {
+  position: fixed;
+  top: 50px; /* İstediğiniz dışarı taşma miktarını buradan ayarlayabilirsiniz */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* Dialog penceresinin genişliği */
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+}
+.dialog-title {
+  position: absolute;
+  top: -1.5em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+  left: 50%;
+  transform: translateX(-50%) scale(1); /* Scale özelliği ile oranlı büyüme ekleyin */
+  background-color: white;
+  padding: 0.25em 0.5em; /* Ölçüleri em biriminde ayarlayın */
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 0.5em 0.5em 0 0; /* Kenar yarıçapını em biriminde ayarlayın */
+  z-index: 1;
+  transform-origin: top center; /* Transformun başlangıç noktasını belirleyin */
+  transition: transform 0.3s ease; /* Smooth geçiş efekti ekleyin */
+}
+.header-title {
+  position: absolute;
+  top: -1.2em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+  left: 50%;
+  transform: translateX(-50%) scale(1); /* Scale özelliği ile oranlı büyüme ekleyin */
+  padding: 0.25em 0.5em; /* Ölçüleri em biriminde ayarlayın */
+  border-bottom: none;
+  border-radius: 0.5em 0.5em 0 0; /* Kenar yarıçapını em biriminde ayarlayın */
+  z-index: 1;
+  transform-origin: top center; /* Transformun başlangıç noktasını belirleyin */
+  transition: transform 0.3s ease; /* Smooth geçiş efekti ekleyin */
+}
+.star-layout1 {
+  top: -2em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+}.star-layout2 {
+  top: -2.4em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+}.star-layout3 {
+  top: -2.6em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+}.star-layout4 {
+  top: -2.8em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+}
+.star-layout5 {
+  top: -3.0em; /* Başlığın dışarı taşma miktarı (örneğin, 0.5em olarak ayarlandı) */
+}
+
+
+.dialog-title:hover {
+  transform: translateX(-50%) scale(1.1); /* Fare üzerine geldiğinde büyüme efekti */
+}
+
+.headerStar {
+  color:orange;
+  font-size: 24px; /* Varsayılan boyut */
+  transition: font-size 0.2s ease-in-out; /* Geçiş efekti */
+}
+
+.headerStar.larger {
+  font-size: 45px; /* 1 yıldız üzerinde */
+}
+
+.headerStar.larger-more {
+  font-size: 50px; /* 2 yıldız üzerinde */
+}
+
+.headerStar.larger-most {
+  font-size: 55px; /* 3 yıldız üzerinde */
+}
+
+.headerStar.largest {
+  font-size: 60px; /* 4 yıldız üzerinde */
+}
+
+.headerStar.largest-most {
+  font-size: 65px; /* 5 yıldız üzerinde */
+}

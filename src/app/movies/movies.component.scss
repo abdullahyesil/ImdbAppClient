@@ -1,0 +1,9 @@
+.card-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* İstenirse kartlar arasında boşluk eklemek için */
+}
+.card-ikiser{
+    width: calc(50% - 20px); /* Kartların yarı genişliği (iki sütun için) */
+}
+

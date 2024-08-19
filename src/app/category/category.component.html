@@ -1,0 +1,19 @@
+<div class="list-group">
+  <div class="item-group list-group">
+    <button  (click)="openMyList()" class="btn btn-warning mb-3">Film Listem</button>
+    </div>
+    <a
+    routerLink="/movies"
+    [class.active]="displayAll"
+    (click)="selectCategory(null)"
+    class="list-group-item list-group item-action">Tüm Kategoriler
+  </a>
+    <a 
+     *ngFor="let item of categories" 
+    [routerLink]="['/movies/category/', item.id]"
+    [class.active]="!displayAll && selectedCategory.id == item.id"
+    (click)="selectCategory(item)"
+    class="list-group-item list-group item-action"> 
+    {{item.name}}</a>
+</div>
+

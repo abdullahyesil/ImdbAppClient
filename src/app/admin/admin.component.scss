@@ -1,0 +1,10 @@
+.logo {
+    text-align: center; /* Yatay olarak ortala */
+  }
+  
+  .logo img {
+    max-width: 30%;
+    max-width: 30%; /* Resmin maksimum genişliği */
+    height: auto; /* Yüksekliği otomatik ayarla */
+    display: inline-block; /* Resmi inline blok olarak ayarla */
+  }

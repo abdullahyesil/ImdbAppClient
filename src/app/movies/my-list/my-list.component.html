@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Film listeniz</h2>
+<mat-dialog-content>
+
+
+  <table class="table bordered">
+    <thead>
+      <tr>
+        <th>Film Adı</th>
+        <th>Film puanı</th>
+        <th>Film Açıklaması</th>
+        <th>Film Yılı</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of mylist">
+      <tr>
+        <td>{{item.movieName}}</td>
+        <td>{{item.rate}}</td>
+        <td>{{item.description | ozet:100}}</td>
+        <td>{{item.releaseDate |date : 'y'}}</td>
+      </tr>   
+
+      </tbody>
+      </table>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn btn-primary" mat-dialog-close>Kapat</button>
+</mat-dialog-actions>

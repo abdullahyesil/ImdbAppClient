@@ -1,0 +1,23 @@
+<div class="container my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menu></app-menu>
+      </div>
+      <div class="col-md-9">
+
+        <h4 class="text-center"><b>Kategoriler</b></h4>
+        <div class="row">
+            <div class="col-md-6 mb-4" *ngFor="let item of category; index as i">
+              <div class="card w-100">
+                <div class="card-body">
+                  <h6 class="card-title">{{ item.name }}</h6>
+                  <button (click)="deleteCategory(item.id)" class="btn btn-danger">Sil</button>
+                  <button (click)="openUpdateModal(item.id)" class="btn btn-primary">Düzenle</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+</div>

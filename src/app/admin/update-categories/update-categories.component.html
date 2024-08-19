@@ -1,0 +1,19 @@
+<div class="pencere">
+  <mat-dialog-content>
+    <div class="form-container">
+      <form>
+        <div class="form-group">
+          <input #categoryId type="hidden" [value]="category?.id">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Kategori Adı</mat-label>
+            <input #categoryName matInput placeholder="Kategori Adı" [value]="category?.name">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </mat-dialog-content>    
+  <mat-dialog-actions align="end">
+    <button (click)="updateCategory(categoryId, categoryName)" mat-button mat-dialog-close color="primary">Güncelle</button>
+    <button mat-button mat-dialog-close color="warn">Kapat</button>
+  </mat-dialog-actions>
+</div>
