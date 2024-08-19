@@ -61,10 +61,10 @@
                             <div class="mt-auto">
                               <a routerLink="/movies/{{ item.id }}" class="btn btn-sm btn-outline-primary"> Film Detay</a>
                               <ng-template [ngIf]="Listedezatenvarmi(item)" [ngIfElse]="yokTemplate">
-                                <button (click)="addToList($event, item)" class="btn btn-sm btn-danger float-end">Listeden Çıkar</button>
+                                <img (click)="addToList($event, item)" src="assets/icons/deleteMyList.png" class="h-50 mylist float-end" alt="Listeden çıkar"/>
                               </ng-template>
                               <ng-template #yokTemplate>
-                                <button (click)="addToList($event, item)" class="btn btn-sm btn-primary float-end">Listeye Ekle</button>
+                                <img (click)="addToList($event, item)" src="assets/icons/addMyList.png"  class="h-50 active mylist float-end" alt="Listeye ekle" />
                               </ng-template>
                             </div>
                           </div>

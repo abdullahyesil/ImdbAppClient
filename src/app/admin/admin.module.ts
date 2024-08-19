@@ -21,6 +21,7 @@ import { UpdateMoviesComponent } from './update-movies/update-movies.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { StatisticComponent } from './statistic/statistic.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { StatisticComponent } from './statistic/statistic.component';
     UpdateCategoriesComponent,
     UpdateMoviesComponent,
     StatisticComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

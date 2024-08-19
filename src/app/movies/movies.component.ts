@@ -101,10 +101,10 @@ addToList($event:any, item: MoviesModel){
 console.log("Butona tıklandı." + item.movieName);
 console.log($event.target.classList);
 
-  if ($event.target.classList.contains("btn-primary")) {
+  if ($event.target.classList.contains("active")) {
     $event.target.innerText = "Listeden çıkar";
-    $event.target.classList.remove("btn-primary");
-    $event.target.classList.add("btn-danger");
+    $event.target.classList.remove("active");
+    $event.target.classList.add("delete");
     this.alertify.succes(item.movieName+ ' listene eklendi.');
     let mylistitems= this.getMyListFromLS();
     mylistitems.push(item)

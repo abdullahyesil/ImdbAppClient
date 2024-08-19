@@ -6,13 +6,15 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { GetMoviesComponent } from './get-movies/get-movies.component';
 import { GetCategoriesComponent } from './get-categories/get-categories.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'addMovie', component: AddMoviesComponent },
   { path: 'addCategory', component: AddCategoryComponent },
   { path: 'getMovies', component: GetMoviesComponent },
-  { path: 'getCategories', component: GetCategoriesComponent }
+  { path: 'getCategories', component: GetCategoriesComponent },
+  { path: 'settings', component: SettingsComponent }
 ];
 
 @NgModule({

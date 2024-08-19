@@ -2,9 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-
-import { AdminComponent } from './admin/admin.component';
-import { AddMoviesComponent } from './admin/add-movies/add-movies.component';
 import { AuthComponent } from './user/auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';

@@ -1,0 +1,83 @@
+<div class="container my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menu></app-menu>
+      </div>
+      <div class="col-md-9">
+        <mat-tab-group>
+          <mat-tab label="Site Ayarları">
+            <form>
+                <div>
+                  <label for="id">ID:</label>
+                  <input type="number" id="id" name="id" [(ngModel)]="siteSettings.id" readonly>
+                </div>
+              
+                <div>
+                  <label for="name">Site Adı:</label>
+                  <input type="text" id="name" name="name" [(ngModel)]="siteSettings.name" placeholder="imdbApp">
+                </div>
+              
+                <div>
+                  <label for="description">Açıklama:</label>
+                  <textarea id="description" name="description" [(ngModel)]="siteSettings.description" placeholder="Sitenizi açıklayan bir açıklama girin.." ></textarea>
+                </div>
+              
+                <div>
+                  <label for="meta">Meta Etiketleri:</label>
+                  <input type="text" id="meta" name="meta" [(ngModel)]="metaItem" #metaInput placeholder="Örn: En iyi filmler, Tr En iyi dizi oylama sitesi,">
+                  <button type="button" (click)="addMeta(metaInput.value)">Add Meta</button>
+                  <ul>
+                    <li *ngFor="let meta of siteSettings.meta">
+                      {{meta}} <button type="button" (click)="removeMeta(meta)">Remove</button>
+                    </li>
+                  </ul>
+                </div>
+              
+                <div>
+                  <label for="author">Author:</label>
+                  <input type="text" id="author" name="author" [(ngModel)]="siteSettings.author" placeholder="Abdullah Yesil">
+                </div>
+              
+                <div>
+                  <label for="facebook">Facebook:</label>
+                  <input type="url" id="facebook" name="facebook" [(ngModel)]="siteSettings.facebook" placeholder="https://wwww.facebook.com/imdbApp"> 
+                </div>
+              
+                <div>
+                  <label for="twitter">Twitter:</label>
+                  <input type="url" id="twitter" name="twitter" [(ngModel)]="siteSettings.twitter" placeholder="https://wwww.twitter.com/imdbApp">
+                </div>
+              
+                <div>
+                  <label for="tiktok">Tiktok:</label>
+                  <input type="url" id="tiktok" name="tiktok" [(ngModel)]="siteSettings.tiktok" placeholder="https://wwww.tiktok.com/imdbApp">
+                </div>
+              
+                <div>
+                  <label for="youtube">YouTube:</label>
+                  <input type="url" id="youtube" name="youtube" [(ngModel)]="siteSettings.youtube" placeholder="https://wwww.youtube.com/imdbApp">
+                </div>
+              
+                <div>
+                  <label for="instagram">Instagram:</label>
+                  <input type="url" id="instagram" name="instagram" [(ngModel)]="siteSettings.instagram" placeholder="https://wwww.instagram.com/imdbApp">
+                </div>
+              
+                <button type="submit" (click)="saveSettings()">Save Settings</button>
+              </form>
+              
+
+          </mat-tab>
+          <mat-tab label="Anasayfa Ayarları">
+            <!-- İstatistikler -->
+           
+          
+          </mat-tab>
+          <mat-tab label="Üyeler">
+         
+        <!-- İstatistikler -->
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+</div>
