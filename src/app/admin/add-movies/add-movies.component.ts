@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { ActorService } from '../../services/actor.service';
 import { ActorDTO } from '../../model/entities/DTO/actorDTO';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-add-movies',
@@ -16,9 +17,15 @@ import { ActorDTO } from '../../model/entities/DTO/actorDTO';
 })
 export class AddMoviesComponent implements OnInit {
 
+
   categories: CategoryModel[] = [];
   actors: ActorDTO[]=[]
   model: any = {};
+  totalCount:number;
+  pageIndex:number=0;
+  size:number=12;
+  searchKey:string = ""
+  myMovieActors: ActorDTO[] = []
 
   constructor(
     private categoryService: CategoryService,
@@ -33,16 +40,46 @@ export class AddMoviesComponent implements OnInit {
       this.categories = data;
     });
 
-    this.actorService.get(0,6, "").subscribe(resp=> 
-      this.actors= resp.actors
-    )
+    this.actorGetir( this.pageIndex, this.size,this.searchKey )
+  }
+
+  AddMyMovieActor(item:ActorDTO) {
+    
+    if(!this.myMovieActors.includes(item))
+      this.myMovieActors.push(item)
+    }
+
+    deleteMyMovieActor(_t66: ActorDTO) {
+      this.myMovieActors = this.myMovieActors.filter(m => m.name !== _t66.name);
+      }
+      
+
+  onPageChange(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.size = event.pageSize;
+    
+    // Burada API'yi tekrar çağırarak, belirli sayfa boyutuna göre verileri çekebilirsiniz
+    this.actorGetir(this.pageIndex, this.size, this.searchKey);
+   
   }
 
 search(event:string){
+  this.searchKey = event
+  this.actorGetir( this.pageIndex, this.size, this.searchKey)
 
-  this.actorService.get(0,6,event).subscribe(resp=> this.actors = resp.actors)
-console.log(event)
 }
+
+actorGetir(page:number, size:number, value?:string){
+
+  this.actorService.get(page,this.size,value).subscribe(resp=> {
+    this.actors = resp.actors
+    this.totalCount = resp.totalCount
+  })
+
+}
+
+
+
   formatDate(date: string): string {
     const parts = date.split('.');
     const parsedDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
@@ -58,7 +95,9 @@ console.log(event)
       imageUrl: imageUrl.value,
       rate: parseInt(rate.value),
       categoryId: parseInt(categoryId.value),
+      actors: this.myMovieActors
     };
+    console.log(movie)
 
     this.movieService.addMovie(movie).subscribe(
       data => {

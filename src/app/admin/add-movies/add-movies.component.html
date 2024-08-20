@@ -43,13 +43,33 @@
                 <option name="categoryId" *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
               </select>
             </div>
+            <div class="form-group col-md-12 mb-2">
+              <label for="categoryId">Oyuncular</label>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of myMovieActors">
+                  
+                    <td>{{ item.name }}</td>
+                    <td><button (click)="deleteMyMovieActor(item)" class="btn-danger btn">Kaldır</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
           </form>
         </div>
         <!-- Oyuncu Arama ve Listeleme Alanı -->
         <div class="col-md-6">
           <div class="form-group mb-2">
             <label for="actorSearch">Oyuncu Ara:</label>
-            <input #actorSearch type="text" id="actorSearch" (keyup)="search(actorSearch.value)" class="form-control" placeholder="Oyuncu ismi girin">
+            <input #actorSearch type="text" id="actorSearch" (keyup)="search(actorSearch.value)" class="form-control"
+              placeholder="Oyuncu ismi girin">
           </div>
           <!-- Oyuncu Listesi Tablosu -->
           <table class="table table-bordered mt-3">
@@ -63,11 +83,13 @@
               <tr *ngFor="let item of actors">
                 <td>{{item.name}}</td>
                 <td>
-                  <button type="button" class="btn btn-danger" >Sil</button>
+                  <button (click)="AddMyMovieActor(item)" type="button" class="btn btn-success">Ekle</button>
                 </td>
               </tr>
             </tbody>
           </table>
+          <mat-paginator [length]="totalCount" [pageSize]="size" (page)="onPageChange($event)" aria-label="Select page">
+          </mat-paginator>
         </div>
       </div>
 

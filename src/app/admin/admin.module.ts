@@ -22,6 +22,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AddActorComponent } from './add-actor/add-actor.component';
+import { UpdateActorComponent } from './update-actor/update-actor.component';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +39,8 @@ import { SettingsComponent } from './settings/settings.component';
     UpdateMoviesComponent,
     StatisticComponent,
     SettingsComponent,
+    AddActorComponent,
+    UpdateActorComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +56,9 @@ import { SettingsComponent } from './settings/settings.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatPaginatorModule
+
   
   ]
 })

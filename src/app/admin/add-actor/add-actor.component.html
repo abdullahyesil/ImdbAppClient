@@ -1,0 +1,73 @@
+<div class="container my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menu></app-menu>
+      </div>
+  
+      <div class="col-md-9">
+        <div class="container my-3">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="card">
+                <div class="card-header">
+                  <h3>{{ isEditing ? 'Oyuncu Düzenle' : 'Oyuncu Ekle' }}</h3>
+                </div>
+                <div class="card-body">
+                  <form (ngSubmit)="addActor()">
+                    <div class="form-group mb-3">
+                      <label for="actorName">Oyuncu Adı</label>
+                      <input type="text" id="actorName" class="form-control" placeholder="Oyuncu adı girin"
+                        [(ngModel)]="actor.name" name="name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ isEditing ? 'Güncelle' : 'Ekle' }}</button>
+                    <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">İptal</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3>Oyuncu Listesi</h3>
+                </div>
+                <div class="card-body">
+                  <div class="form-group mb-3">
+                    <label for="actorSearch">Oyuncu Ara:</label>
+                    <input #actorSearch type="text" id="actorSearch" (keyup)="search(actorSearch.value)"
+                      class="form-control" placeholder="Oyuncu ismi girin">
+                  </div>
+  
+                  <!-- Oyuncu Listesi Tablosu -->
+                  <table class="table table-bordered mt-3">
+                    <thead>
+                      <tr>
+                        <th>Oyuncu İsmi</th>
+                        <th>İşlemler</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of actors">
+                        <td>{{ item.name }}</td>
+                        <td>
+                          <button type="button" class="btn btn-success" (click)="editActor(item)">Düzenle</button>
+                          <button type="button" class="btn btn-danger"  (click)="delete(item.id)" >Sil</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+  
+                  <!-- Pagination -->
+                  <mat-paginator [length]="totalCount" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="size"
+                    (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

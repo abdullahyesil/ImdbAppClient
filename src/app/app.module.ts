@@ -29,6 +29,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MetaKeyComponent } from './meta-key/meta-key.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,8 +53,8 @@ import { MetaKeyComponent } from './meta-key/meta-key.component';
     CommonModule,
     FormsModule,
     MatDialogModule,
-    MatButtonToggleModule
-
+    MatButtonToggleModule,
+   
 
   ],
   providers: [
