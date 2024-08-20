@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MoviesModel } from '../model/movies.model';
+import { MoviesModel } from '../model/entities/movies.model';
 import localeTr from '@angular/common/locales/tr';
 import { registerLocaleData } from '@angular/common';
 import { AlertifyServiceService } from '../services/alertify-service.service';

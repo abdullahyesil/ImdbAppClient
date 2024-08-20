@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, delay, Observable, tap } from 'rxjs';
-import { MoviesModel } from '../model/movies.model';
+import { MoviesModel } from '../model/entities/movies.model';
 
 @Injectable(
 

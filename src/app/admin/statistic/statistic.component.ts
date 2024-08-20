@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OtherService } from '../../services/other.service';
 import { voteInfoModel } from '../../model/voteInfo.model';
-import { MoviesModel } from '../../model/movies.model';
+import { MoviesModel } from '../../model/entities/movies.model';
 import { MovieService } from '../../services/movie.service';
 
 @Component({

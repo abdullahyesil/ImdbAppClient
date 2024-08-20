@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, inject } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MoviesModel } from '../../model/movies.model';
+import { MoviesModel } from '../../model/entities/movies.model';
 import { CategoryModel } from '../../model/category.model';
 import { CategoryService } from '../../services/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

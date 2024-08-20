@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesModel } from '../../model/movies.model';
+import { MoviesModel } from '../../model/entities/movies.model';
 
 @Component({
   selector: 'app-my-list',

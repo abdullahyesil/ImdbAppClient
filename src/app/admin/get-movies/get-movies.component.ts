@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { MoviesModel } from '../../model/movies.model';
+import { MoviesModel } from '../../model/entities/movies.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { UpdateMoviesComponent } from '../update-movies/update-movies.component';

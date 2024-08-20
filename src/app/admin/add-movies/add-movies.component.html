@@ -5,50 +5,76 @@
     </div>
 
     <div class="col-md-9">
-      <form>
-        <div class="form-row">
-          <div class="form-group col-md-6 mb-2">
-            <label for="MovieName">Film Adı</label>
-            <input #movieName type="text" class="form-control" id="MovieName" placeholder="Film Adı">
-          </div>
-          <div class="form-group col-md-6 mb-2">
-            <label for="description">Film Açıklaması: </label>
-            <textarea #description rows="10" type="textarea" class="form-control" id="description"
-              placeholder="Film açıklaması"></textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-6 mb-2">
-          <label for="imageUrl">Resim Url :</label>
-          <input #imageUrl type="text" class="form-control" id="imageUrl"
-            placeholder=" https://ornek.com/filmresmi.png">
-        </div>
-        <mat-form-field>
-          <mat-label>Lütfen bir tarih seçin..</mat-label>
-          <input matInput [matDatepicker]="releaseDate" #releaseDate2>
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="releaseDate"></mat-datepicker-toggle>
-          <mat-datepicker #releaseDate></mat-datepicker>
-        </mat-form-field>
+      <div class="row">
+        <!-- Film Ekleme Formu -->
+        <div class="col-md-6">
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-12 mb-2">
+                <label for="MovieName">Film Adı</label>
+                <input #movieName type="text" class="form-control" id="MovieName" placeholder="Film Adı">
+              </div>
+              <div class="form-group col-md-12 mb-2">
+                <label for="description">Film Açıklaması: </label>
+                <textarea #description rows="10" type="textarea" class="form-control" id="description"
+                  placeholder="Film açıklaması"></textarea>
+              </div>
+            </div>
+            <div class="form-group col-md-12 mb-2">
+              <label for="imageUrl">Resim Url :</label>
+              <input #imageUrl type="text" class="form-control" id="imageUrl"
+                placeholder="https://ornek.com/filmresmi.png">
+            </div>
+            <mat-form-field class="w-100">
+              <mat-label>Lütfen bir tarih seçin..</mat-label>
+              <input matInput [matDatepicker]="releaseDate" #releaseDate2>
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="releaseDate"></mat-datepicker-toggle>
+              <mat-datepicker #releaseDate></mat-datepicker>
+            </mat-form-field>
 
-
-        <div class="form-group col-md-6 mb-2">
-          <label for="rate">Rate</label>
-          <input #rate type="text" class="form-control" id="rate" placeholder="1 of 5">
+            <div class="form-group col-md-12 mb-2">
+              <label for="rate">Rate</label>
+              <input #rate type="text" class="form-control" id="rate" placeholder="1 of 5">
+            </div>
+            <div class="form-group col-md-12 mb-2">
+              <label for="categoryId">Kategori ismi</label>
+              <select #categoryId class="form-select" aria-label="Default select example">
+                <option name="categoryId" *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+              </select>
+            </div>
+          </form>
         </div>
-        <div class="form-group col-md-6 mb-2">
-          <label for="categoryId">Kategori ismi</label>
-          <select #categoryId class="form-select" aria-label="Default select example">
-            <option name="categoryId" *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
-          </select>
+        <!-- Oyuncu Arama ve Listeleme Alanı -->
+        <div class="col-md-6">
+          <div class="form-group mb-2">
+            <label for="actorSearch">Oyuncu Ara:</label>
+            <input #actorSearch type="text" id="actorSearch" (keyup)="search(actorSearch.value)" class="form-control" placeholder="Oyuncu ismi girin">
+          </div>
+          <!-- Oyuncu Listesi Tablosu -->
+          <table class="table table-bordered mt-3">
+            <thead>
+              <tr>
+                <th>Oyuncu İsmi</th>
+                <th>İşlemler</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of actors">
+                <td>{{item.name}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger" >Sil</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </form>
+      </div>
 
       <div class="mt-2">
         <button type="button" (click)="addMovie(movieName, description, imageUrl, releaseDate2, rate, categoryId)"
           class="btn btn-primary">Filmi Ekle</button>
       </div>
-
-
     </div>
   </div>
 </div>

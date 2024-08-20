@@ -28,6 +28,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { MetaKeyComponent } from './meta-key/meta-key.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { AboutComponent } from './about/about.component';
     LoadingComponent,
     AuthComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    MetaKeyComponent
   ],
   imports: [
     BrowserModule,

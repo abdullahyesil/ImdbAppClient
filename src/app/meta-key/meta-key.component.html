@@ -1,0 +1,7 @@
+
+<title>{{ siteSetting?.name || 'No Name Provided' }}</title>
+<title #no_Name>Lütfen site adını girin..</title>
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<meta *ngIf="siteSetting?.author" name="Author" content="{{siteSetting.author}}"> 
+<meta *ngIf="siteSetting?.description" name="description" content="{{siteSetting.description}}">
+<meta *ngIf="siteSetting?.meta?.length > 0" name="keywords" content="{{siteMetaGenerate()}}"> 
