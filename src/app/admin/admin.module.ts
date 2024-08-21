@@ -25,6 +25,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddActorComponent } from './add-actor/add-actor.component';
 import { UpdateActorComponent } from './update-actor/update-actor.component';
+import { HomepageSettingsComponent } from './homepage-settings/homepage-settings.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { UpdateActorComponent } from './update-actor/update-actor.component';
     SettingsComponent,
     AddActorComponent,
     UpdateActorComponent,
+    HomepageSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +60,8 @@ import { UpdateActorComponent } from './update-actor/update-actor.component';
     ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSlideToggleModule
 
   
   ]

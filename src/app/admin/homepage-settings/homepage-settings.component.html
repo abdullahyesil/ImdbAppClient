@@ -1,0 +1,43 @@
+<form>
+    <div class="form-group">
+        <label for="h1Name">H1 Name</label>
+        <input type="text" id="h1Name" name="h1Name">
+    </div>
+
+    <div class="form-group">
+        <label for="surveys">Surveys</label>
+        <mat-slide-toggle (click)="openSurvey(isSurvey)" class="">Enable Survey {{isSurvey}}</mat-slide-toggle>
+    </div>
+
+    <div *ngIf="isSurvey" class="form-group">
+        <label for="surveyId">Survey ID</label>
+        <input type="number" id="surveyId" name="surveyId">
+    </div>
+
+    <div class="form-group">
+        <label for="imdbAppStory">IMDb App Story</label>
+        <mat-slide-toggle (click)="openStory(isImdbStory)"  >Enable App Story</mat-slide-toggle>
+    </div>
+
+    <div *ngIf="isImdbStory" class="form-group">
+        <label for="imdbAppStoryId">IMDb App Story ID (List)</label>
+        <input type="text" id="imdbAppStoryId" name="imdbAppStoryId" placeholder="Comma separated values">
+    </div>
+
+    <div class="form-group">
+        <label for="carousel">Carousel</label>
+        <mat-slide-toggle (click)="openCarousel(isCarousel)">Enable Carouse</mat-slide-toggle>
+    </div>
+
+    <div *ngIf="isCarousel" class="form-group">
+        <label for="carouselId">Carousel ID (List)</label>
+        <input type="text" id="carouselId" name="carouselId" placeholder="Comma separated values">
+    </div>
+
+    <div class="form-group">
+        <label for="carouselBaslik">Carousel Başlık</label>
+        <input type="text" id="carouselBaslik" name="carouselBaslik">
+    </div>
+
+    <button type="submit">Kaydet</button>
+</form>

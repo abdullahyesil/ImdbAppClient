@@ -63,15 +63,13 @@
                   <input type="url" id="instagram" name="instagram" [(ngModel)]="siteSettings.instagram" placeholder="https://wwww.instagram.com/imdbApp">
                 </div>
               
-                <button type="submit" (click)="saveSettings()">Save Settings</button>
+                <button type="submit" (click)="saveSettings()">Kaydet</button>
               </form>
               
 
           </mat-tab>
           <mat-tab label="Anasayfa Ayarları">
-            <!-- İstatistikler -->
-           
-          
+            <app-homepage-settings></app-homepage-settings>
           </mat-tab>
           <mat-tab label="Üyeler">
          

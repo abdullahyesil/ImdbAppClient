@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-
+<ng-template *ngIf="movie.actors.length>0 else no_Actor">
     <!-- Oyuncuları Gösterme Bölümü -->
     <h2>Oyuncular</h2>
     <div class="row">
@@ -27,7 +27,12 @@
             </div>
         </div>
     </div>
+</ng-template>
+<ng-template #no_Actor>
+    <div class="alert alert-warning">Oyuncu Bulunamadı</div>
+</ng-template>
 </div>
+
 
 <ng-template #no_movie>
     <div class="alert alert-warning">Film Bulunamadı</div>
