@@ -36,25 +36,19 @@
     </div>
 
     <!-- tag or comment-->
-<div class="label-box p-4 mt-3">
+<div *ngIf="surveyModel" class="label-box p-4 mt-3">
   <div class="w-100">
-    <b>Tarihin en iyi filmi..</b>
+    <b>{{surveyModel.title}}</b>
   </div>
   <div class="row">
-    <div class="col-auto w-100">
+    <div *ngFor="let oy of surveyModel.options" class="col-auto w-100">
       <label>
-        <input type="radio" name="movieName" value="Matrix" class="radio-item item-action" >
-        Matrix
+        <input type="radio" name="{{oy.optionText}}"  [(ngModel)]="selectedOptionId" [value]="oy.id" class="radio-item item-action" >
+       {{oy.optionText}}
       </label>
     </div>
-    <div class="col-auto w-100 mt-1">
-      <label>
-        <input type="radio" name="movieName" value="Godfather" class="radio-item item-action" >
-        Godfather
-      </label>
-    </div>
-    <button class="btn btn-primary mt-1">Oy Ver</button>
-    <!-- Diğer seçenekler buraya eklenir -->
+    <button (click)="oyVer()" class="btn btn-primary mt-1">Oy Ver</button>
+
   </div>
 </div>
 
@@ -97,63 +91,24 @@
 <!-- hikayeler -->
   <div class="container mt-3">
     <div class="row justify-content-center">
-      <div class="col-auto">
+
+      <div *ngFor="let item of StoryModel" class="col-auto">
         <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 1">
-          <p class="text-center ">Dabbe 10</p>
+          <img src="{{item.imgUrl}}" class="img-fluid rounded-circle" alt="{{item.imgUrl}}">
+          <p class="text-center ">{{item.name}}</p>
         </div>
       </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 2">
-          <p class="text-center ">Spiderman</p>
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-  fluid rounded-circle" alt="Story 3">
-          <p class="text-center">Godfather</p>
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 4">
-          <p class="text-center">Matrix 5</p>
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 4">
-          <p class="text-center">Matrix 5</p>
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 4">
-          <p class="text-center">Matrix 5</p>
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="story">
-          <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Story 4">
-          <p class="text-center">Matrix 5</p>
-        </div>
-      </div>
+  
     </div>
   </div>  
-<h5 class="text-center display-3 mt-5">Popüler Filmler</h5>
-<div class="">
+<h5  class="text-center display-3 mt-5">Popüler Filmler</h5>
+<div >
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="assets/home/thump1.jpg" class="d-block w-100" alt="...">
+      <div *ngFor="let item of movieModel" class="carousel-item active">
+        <img src="{{item.imageUrl}}" class="d-block w-100" alt="{{item.movieName}}">
       </div>
-      <div class="carousel-item">
-        <img src="assets/home/thump2.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="assets/home/thump3.jpg" class="d-block w-100" alt="...">
-      </div>
+
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

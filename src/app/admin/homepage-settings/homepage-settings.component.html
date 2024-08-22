@@ -1,43 +1,127 @@
-<form>
-    <div class="form-group">
-        <label for="h1Name">H1 Name</label>
-        <input type="text" id="h1Name" name="h1Name">
+<form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="h1Name">H1 Name</label>
+    <input type="text" id="h1Name" name="h1Name" formControlName="h1Name">
+    <div *ngIf="settingsForm.get('h1Name').invalid && settingsForm.get('h1Name').touched" class="text-danger">
+      H1 Name is required
     </div>
+  </div>
 
-    <div class="form-group">
-        <label for="surveys">Surveys</label>
-        <mat-slide-toggle (click)="openSurvey(isSurvey)" class="">Enable Survey {{isSurvey}}</mat-slide-toggle>
+  <div class="form-group">
+    <label for="surveys">Surveys</label>
+    <mat-slide-toggle [checked]="isSurvey" (click)="openSurvey(isSurvey)" formControlName="surveys">
+      Enable Survey {{isSurvey}}
+    </mat-slide-toggle>
+  </div>
+
+  <div *ngIf="isSurvey" class="form-group">
+    <label for="surveyId">Survey ID</label>
+    <input type="number" id="surveyId" name="surveyId" formControlName="surveyId">
+    <div *ngIf="settingsForm.get('surveyId').invalid && settingsForm.get('surveyId').touched" class="text-danger">
+      Survey ID is required
     </div>
+  </div>
 
-    <div *ngIf="isSurvey" class="form-group">
-        <label for="surveyId">Survey ID</label>
-        <input type="number" id="surveyId" name="surveyId">
+  <div *ngIf="isSurvey">
+    <div *ngFor="let item of survey" class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h6 class="card-title">{{item.title}}</h6>
+        <a 
+          [ngClass]="{'btn-success': !isSurveySelected(item.id), 'btn-secondary': isSurveySelected(item.id)}"
+          (click)="setSurveyId(item.id)" class=" btn btn-success card-link">
+          {{ isSurveySelected(item.id) ? 'Eklendi' : 'Ekle' }}
+        </a>
+      </div>
     </div>
+  </div>
 
-    <div class="form-group">
-        <label for="imdbAppStory">IMDb App Story</label>
-        <mat-slide-toggle (click)="openStory(isImdbStory)"  >Enable App Story</mat-slide-toggle>
+  <div class="form-group">
+    <label for="imdbAppStory">IMDb App Story</label>
+    <mat-slide-toggle [checked]="isImdbStory" (click)="openStory(isImdbStory)" formControlName="imdbAppStory">
+      Enable App Story
+    </mat-slide-toggle>
+  </div>
+<button *ngIf="isImdbStory" type="button"  (click)=" openDialog()" class="btn btn-info">Story Ekle</button>
+  <div *ngIf="isImdbStory" class="form-group">
+    <label for="imdbAppStoryId">IMDb App Story ID (List)</label>
+    <input type="text" id="imdbAppStoryId" name="imbdbAppStoryId" formControlName="imdbAppStoryId" placeholder="Comma separated values">
+    <div *ngIf="settingsForm.get('imdbAppStoryId').invalid && settingsForm.get('imdbAppStoryId').touched" class="text-danger">
+      IMDb App Story ID is required
     </div>
+  </div>
 
-    <div *ngIf="isImdbStory" class="form-group">
-        <label for="imdbAppStoryId">IMDb App Story ID (List)</label>
-        <input type="text" id="imdbAppStoryId" name="imdbAppStoryId" placeholder="Comma separated values">
+  <p *ngIf="isImdbStory" class="text-center">Hikayeye tıklayarak ekleyebilirsiniz.</p>
+  <div *ngIf="imdbStoryModel.length>0 && isImdbStory" class="row justify-content-center">
+
+    <div *ngFor="let item of imdbStoryModel" class="col-auto">
+      <div class="story">
+        <img 
+          src="{{item.imgUrl}}" 
+          [ngClass]="{'selected': icindemi(item.id)}" 
+          class="img-fluid rounded-circle" 
+          alt="Story"
+          (click)="toggleSelection(item.id)">
+        <p class="text-center">{{item.name}}</p>
+      </div>
     </div>
+    
 
-    <div class="form-group">
-        <label for="carousel">Carousel</label>
-        <mat-slide-toggle (click)="openCarousel(isCarousel)">Enable Carouse</mat-slide-toggle>
+  </div>
+  <p>Seçilen ID'ler: {{ selectedStoryIds.join(', ') }}</p>
+
+  <div class="form-group">
+    <label for="carousel">Carousel</label>
+    <mat-slide-toggle [checked]="isCarousel" (click)="openCarousel(isCarousel)" formControlName="carousel">
+    
+    </mat-slide-toggle>
+  </div>
+
+  <input *ngIf="selectedMovies.length > 0" type="text" formControlName="carouselId">
+
+  
+  <div *ngIf="isCarousel" class="form-group mb-3">
+    <label for="actorSearch">Carousel Film Ekle</label>
+    <input #movieSearch type="text" id="actorSearch" (keyup)="search(movieSearch.value)"  class="form-control" placeholder="Film ismi girin">
+  </div>
+  
+
+  <!-- Film Listesi -->
+  <ul class="list-group mt-3" *ngIf="movieModel && movieModel.length > 0 && isCarousel">
+    <li class="list-group-item" *ngFor="let movie of movieModel">
+      {{ movie.movieName }} ({{ movie.releaseDate | date: 'yyyy' }})
+      <button type="button" class="btn btn-primary btn-sm float-end" (click)="ekle(movie); $event.stopPropagation()">Ekle</button>
+    </li>
+  </ul>
+
+  <!-- Eğer film bulunamazsa -->
+  <p *ngIf="movieModel && movieModel.length === 0">Aradığınız kriterlere uygun film bulunamadı.</p>
+
+  <!-- Seçilen Filmler Tablosu -->
+  <table class="table mt-5" *ngIf="selectedMovies.length > 0 && isCarousel">
+    <thead>
+      <tr>
+        <th>Film Adı</th>
+        <th>Yayın Tarihi</th>
+        <th>İşlem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of selectedMovies">
+        <td>{{ movie.movieName }}</td>
+        <td>{{ movie.releaseDate | date: 'yyyy' }}</td>
+        <td><button (click)="cikar(movie)" class="btn btn-danger">Çıkar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  
+  <div *ngIf="isCarousel" class="form-group">
+    <label for="carouselBaslik">Carousel Başlık</label>
+    <input type="text" id="carouselBaslik" name="carouselBaslik" formControlName="carouselBaslik">
+    <div *ngIf="settingsForm.get('carouselBaslik').invalid && settingsForm.get('carouselBaslik').touched" class="text-danger">
+      Carousel Başlık is required
     </div>
+  </div>
 
-    <div *ngIf="isCarousel" class="form-group">
-        <label for="carouselId">Carousel ID (List)</label>
-        <input type="text" id="carouselId" name="carouselId" placeholder="Comma separated values">
-    </div>
-
-    <div class="form-group">
-        <label for="carouselBaslik">Carousel Başlık</label>
-        <input type="text" id="carouselBaslik" name="carouselBaslik">
-    </div>
-
-    <button type="submit">Kaydet</button>
+  <button type="submit">Kaydet</button>
 </form>

@@ -24,6 +24,17 @@ export class MovieService {
   );
 }
 
+getMoviesPage(page:number, size:number, searchKey:string)
+{
+  return this.http.get<any>(this.url+ "/Movie", {
+    params: {
+      page:page,
+      size:size,
+      value:searchKey
+    }
+  })
+}
+
 
  getMovieById(movieId:number):Observable<MoviesModel>{
    console.log(this.url + '/Movie/' + movieId);
@@ -42,7 +53,11 @@ updateMovie(movie:MoviesModel){
 }
 
 voteMovie(movie:MoviesModel, verilenOy:number){
-  let newVoteUrl= this.url + '/movie/updateMovie/' +movie.id;
+  let newVoteUrl= this.url + '/movie/updateMovie/'+movie.id;
+}
+
+getMovieIds(ids:number[]):Observable<MoviesModel[]>{
+return this.http.post<MoviesModel[]>(this.url+ "/Movie/MovieIds/", ids)
 }
 
 }

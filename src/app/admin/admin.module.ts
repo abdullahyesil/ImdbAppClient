@@ -27,6 +27,8 @@ import { AddActorComponent } from './add-actor/add-actor.component';
 import { UpdateActorComponent } from './update-actor/update-actor.component';
 import { HomepageSettingsComponent } from './homepage-settings/homepage-settings.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
+import { AddStoryComponent } from './add-story/add-story.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     AddActorComponent,
     UpdateActorComponent,
     HomepageSettingsComponent,
+    AddSurveyComponent,
+    AddStoryComponent,
   ],
   imports: [
     CommonModule,

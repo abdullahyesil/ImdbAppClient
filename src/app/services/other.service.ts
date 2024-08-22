@@ -35,7 +35,9 @@ export class OtherService {
   getVotedAdmin():Observable<voteInfoModel[]>{
     let newVoteuRL2= this.url + "/Rate";
    return this.http.get<voteInfoModel[]>(newVoteuRL2);
-
   }
+
+
+  
 
 }
