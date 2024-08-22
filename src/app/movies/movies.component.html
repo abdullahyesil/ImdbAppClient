@@ -7,7 +7,7 @@
 
             <h2> Filmler</h2>
             <div class="mb-3">
-                <input [(ngModel)]="filterText" (keyup)="onInputChance()" type="text" class="form-control"
+                <input [(ngModel)]="filterText" (keyup)="onInputChange($event)" type="text" class="form-control"
                     placeholder="Film ara..">
                 <small class="text-muted" *ngIf="filterText">Aradığınız kelime {{filterText}}</small>
             </div>
@@ -116,10 +116,15 @@
                   
                 <!-- yatay tasarım bitiş -->
 
-
-
-
             <app-loading *ngIf="loading"></app-loading>
+
+            <p-paginator 
+            (onPageChange)="onPageChange($event)" 
+            [first]="first"
+            [rows]="rows" 
+            [totalRecords]="totalCount" 
+            [rowsPerPageOptions]="[10, 20, 30]" />
+
         </div>
     </div>
 </div>

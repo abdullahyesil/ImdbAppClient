@@ -9,172 +9,131 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MyListComponent } from './my-list/my-list.component';
 import { VoteComponent } from './vote/vote.component';
-import { error } from 'console';
+import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrl: './movies.component.scss',
+  styleUrls: ['./movies.component.scss'],
   providers: [MovieService]
 })
-export class MoviesComponent implements OnInit{
+export class MoviesComponent implements OnInit {
 
-
-  ListNo:number= 1 //Listeleme için Varsayılan görünüm
-  filterText:string = "";
+  ListNo: number = 1;
+  filterText: string = "";
   movies: MoviesModel[] = [];
-  filtredMovies: MoviesModel[];
+  filtredMovies: MoviesModel[] = [];
   readonly dialog = inject(MatDialog);
-  loading : boolean = false;
-  title="Film listesi";
-error:any;
-
-
+  loading: boolean = false;
+  title = "Film listesi";
+  error: any;
+  
+totalCount:number= 0;
+  first: number = 0;
+  rows: number = 10;
+pageIndex:number = 0;
   constructor(
-    public alertify:AlertifyServiceService,
-    private MovieService:MovieService,
-    private activatedRoute: ActivatedRoute,
-     // getMovies içine duruma bağlı değer göndermek için tanımladık.
-     ){
-    /* this.movieRepository= new MovieRepository(); 
-    this.movies= this.movieRepository.getMovies();
-    this.filtredMovies = this.movies;*/
+    public alertify: AlertifyServiceService,
+    private movieService: MovieService,
+    private activatedRoute: ActivatedRoute
+  ) {
     registerLocaleData(localeTr);
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=> {
+    this.activatedRoute.params.subscribe(params => {
       this.loading = true;
-      this.MovieService.getMovies(params["id"]).subscribe(data => {
-        this.movies = data;
-        this.filtredMovies = this.movies;
-        console.log(this.movies);
-        console.log(this.filtredMovies); 
-        this.loading= false;
-    }, error => this.error = error);
+      this.loadMovies(this.pageIndex, this.rows, this.filterText);
+      if(params["id"] != null)
+       {
 
-    });  
+        this.movieService.getMoviesPage(this.pageIndex, this.rows, this.filterText,params["id"] ).subscribe(resp=>
+          {this.movies = resp.movies
+          this.filtredMovies = resp.movies
+          this.totalCount = resp.totalCount
+          this.loading = false}
+        )
+       }
+    });
+  }
 
+  loadMovies(page:number, size:number, searchKey:string, categoryId?:number) {
 
+    this.movieService.getMoviesPage(page, size, searchKey).subscribe(resp=>
+      {this.movies = resp.movies
+      this.filtredMovies = resp.movies
+      this.totalCount = resp.totalCount
+      this.loading = false}
+    )
 
-/*
-    this.activatedRoot.params.subscribe(params => {
-      const id = Number(params['categoryid']); // Bu id category/:id route'undan gelen id'yi temsil eder
-        console.log('Category ID:', id);
-        if (id) {
-            this.MovieService.getMovies(id).subscribe(
-                (data) => {
-                    this.movies = data;
-                    this.filtredMovies = this.movies;
-                    console.log(this.movies);
-                    console.log(this.filtredMovies);
-                }
-            );
-        } else {
-            // Eğer id parametresi yoksa (movies route'u için)
-            this.MovieService.getMovies().subscribe(
-                (data) => {
-                    this.movies = data;
-                    this.filtredMovies = this.movies;
-                    console.log(this.movies);
-                    console.log(this.filtredMovies);
-                }
-            );
-        }
-    }); */
-}
+ 
+    
+  }
 
+  onInputChange(event: any): void {
+    const inputValue = event.target.value;
+    // Burada girdiği metne göre işlem yapabilirsiniz
+    // Örneğin, bir arama işlemi başlatabilirsiniz
+    this.filterText = inputValue;
 
+    // Örneğin bir arama fonksiyonunu çağırabilirsiniz
+    this.loadMovies(this.pageIndex, this.rows, this.filterText)
+  }
 
+  onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 10;
+    this.pageIndex = event.first / event.rows;
+    this.loadMovies(this.pageIndex, this.rows, this.filterText)
   
-onInputChance(){
-  console.log(this.filterText);
-  this.filtredMovies = this.filterText ?
-    this.movies.filter(m => 
-      m.movieName.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 || 
-      m.description.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1
-    ) :
-    this.movies;
-}
+  }
 
-addToList($event:any, item: MoviesModel){
-console.log("Butona tıklandı." + item.movieName);
-console.log($event.target.classList);
-
-  if ($event.target.classList.contains("active")) {
-    $event.target.innerText = "Listeden çıkar";
-    $event.target.classList.remove("active");
-    $event.target.classList.add("delete");
-    this.alertify.succes(item.movieName+ ' listene eklendi.');
-    let mylistitems= this.getMyListFromLS();
-    mylistitems.push(item)
-    localStorage.setItem("mylist",JSON.stringify(mylistitems));
-    /*
-    if(localStorage.getItem != null){
-
-      localStorage.setItem("mylist", localStorage.getItem+JSON.stringify(item));
-      console.log("boş değil")
+  addToList(event: any, item: MoviesModel) {
+    if (event.target.classList.contains("active")) {
+      event.target.innerText = "Listeden çıkar";
+      event.target.classList.remove("active");
+      event.target.classList.add("delete");
+      this.alertify.succes(item.movieName + ' listene eklendi.');
+      let mylistitems = this.getMyListFromLS();
+      mylistitems.push(item);
+      localStorage.setItem("mylist", JSON.stringify(mylistitems));
+    } else {
+      event.target.innerText = "Listeye Ekle";
+      event.target.classList.remove("btn-danger");
+      event.target.classList.add("btn-primary");
+      this.alertify.error(item.movieName + ' listenden çıkarıldı.');
+      this.deleteMyListFromLs(item);
     }
-    else{
-      localStorage.setItem("mylist", JSON.stringify(item));
-    } */
-    
-  }
-  else{
-    $event.target.innerText = "Listeye Ekle";
-    $event.target.classList.remove("btn-danger");
-    $event.target.classList.add("btn-primary");
-    
-    this.alertify.error(item.movieName+ ' listenden çıkarıldı.');
-
-    this.deleteMyListFromLs(item);
-    
   }
 
-}
   getMyListFromLS() {
-   let items:MoviesModel[] = [];
-   
-   let value = localStorage.getItem('mylist')
-   if(value != null){
-
-    items = JSON.parse(value);
-   }
-
-   return items;
+    let items: MoviesModel[] = [];
+    let value = localStorage.getItem('mylist');
+    if (value != null) {
+      items = JSON.parse(value);
+    }
+    return items;
   }
 
-  deleteMyListFromLs(item: MoviesModel){
+  deleteMyListFromLs(item: MoviesModel) {
     const data = JSON.parse(localStorage.getItem('mylist')) || [];
-    const newData = data.filter((depo: { id: number; })=> depo.id !== item.id)
-    localStorage.setItem('mylist', JSON.stringify(newData));    
+    const newData = data.filter((depo: { id: number; }) => depo.id !== item.id);
+    localStorage.setItem('mylist', JSON.stringify(newData));
   }
 
-
-
-   //Uzun versiyon
-   Listedezatenvarmi(item: MoviesModel):boolean{
+  Listedezatenvarmi(item: MoviesModel): boolean {
     if (typeof window !== 'undefined') {
       const data = JSON.parse(localStorage.getItem('mylist')) || [];
       return data.some((listItem: MoviesModel) => listItem.id === item.id);
     }
-      return false
- 
-    }
+    return false;
+  }
 
-    openVote(rate:number, movieId:number){
-      
-    const diagloRef= this.dialog.open(VoteComponent ,{ data: {rate:rate, movieId:movieId}
-    });
-    
+  openVote(rate: number, movieId: number) {
+    const diagloRef = this.dialog.open(VoteComponent, { data: { rate: rate, movieId: movieId } });
+  }
 
-    }
-
-
-    Listeleme(value:number){
-        this.ListNo=value
-    }
-
-  
-
+  Listeleme(value: number) {
+    this.ListNo = value;
+  }
 }

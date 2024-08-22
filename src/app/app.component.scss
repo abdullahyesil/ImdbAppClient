@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding-bottom: 20px; /* Footer ile içerik arasında boşluk bırakır */
+    color: #fff;
+}
+
+app-footer {
+    height: 50px; /* Footer yüksekliği */
+    background-color: #232931;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

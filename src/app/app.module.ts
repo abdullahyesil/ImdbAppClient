@@ -30,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MetaKeyComponent } from './meta-key/meta-key.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FormsModule,
     MatDialogModule,
     MatButtonToggleModule,
+    PaginatorModule
    
 
   ],

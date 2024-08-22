@@ -24,8 +24,20 @@ export class MovieService {
   );
 }
 
-getMoviesPage(page:number, size:number, searchKey:string)
+getMoviesPage(page:number, size:number, searchKey:string, categoryId?:number)
 {
+  if(categoryId!=null){
+
+    return this.http.get<any>(this.url+ "/Movie", {
+      params: {
+        page:page,
+        size:size,
+        value:searchKey,
+        categoryId:categoryId
+      }
+    })
+  }
+
   return this.http.get<any>(this.url+ "/Movie", {
     params: {
       page:page,
