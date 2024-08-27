@@ -1,12 +1,12 @@
 <div class="list-group">
   <div class="item-group list-group">
-    <button (click)="openMyList()" class="btn btn-warning mb-3">Film Listem</button>
+    <button (click)="openMyList()" class="btn bg-warning mb-3">Film Listem</button>
   </div>
   
   <!-- Tüm Kategoriler Butonu -->
   <a
     routerLink="/movies"
-    [ngClass]="{'active': displayAll}"
+    [ngClass]="{'active bg-warning': displayAll}"
     (click)="selectCategory(null)"
     class="list-group-item list-group-item-action">
     Tüm Kategoriler
@@ -16,7 +16,7 @@
   <a 
     *ngFor="let item of categories" 
     [routerLink]="['/movies/category/', item.id]"
-    [ngClass]="{'active': !displayAll && selectedCategory?.id === item.id}"
+    [ngClass]="{'active bg-warning': !displayAll && selectedCategory?.id === item.id}"
     (click)="selectCategory(item)"
     class="list-group-item list-group-item-action">
     {{item.name}}

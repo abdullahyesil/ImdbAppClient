@@ -29,7 +29,8 @@ import { HomepageSettingsComponent } from './homepage-settings/homepage-settings
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
 import { AddStoryComponent } from './add-story/add-story.component';
-
+import { FileUploadModule } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -65,8 +66,8 @@ import { AddStoryComponent } from './add-story/add-story.component';
     MatTabsModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    FileUploadModule
   
   ]
 })

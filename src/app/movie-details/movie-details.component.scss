@@ -1,0 +1,90 @@
+.like-dislike-container {
+    margin-top: 10px;
+}
+
+.like-button, .dislike-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.like-button:hover, .dislike-button:hover {
+    background-color: #e0e0e0;
+}
+
+.like-button.active {
+    background-color: #0cf06b;
+    color: rgb(34, 34, 34);
+    border-color: #137200;
+}
+
+.dislike-button.active {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+.hand{
+    cursor: pointer;
+}
+.row .col-md-4{
+
+    padding-right:0%;
+    padding-left: 0%;   
+}
+.card{
+    background-color: #232931;
+    color:#EDEDED;
+}
+.actor{
+
+    max-width: 250px;
+    max-height: 250px;
+    
+}
+
+.star{
+    color:orange
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 0,
+  'GRAD' 0,
+  'opsz' 40
+}
+.alert-warning{
+
+    background-color: #F1D18A;
+    color: #232931;
+}
+
+
+
+
+//yorum
+
+#yorumlar {
+    margin-top: 40px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    color: #fa2a05;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #f0c509;
+}

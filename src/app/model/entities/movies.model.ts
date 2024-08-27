@@ -6,5 +6,6 @@ export interface MoviesModel {
     releaseDate: string;
     rate: number;
     categoryId: number;
-    actors?: { id:number, name: string}[]; // Oyuncu listesi (isteğe bağlı)
+    ImageFile?:File;
+    actors?: { id:number, imageUrl:string, name: string}[]; // Oyuncu listesi (isteğe bağlı)
 }

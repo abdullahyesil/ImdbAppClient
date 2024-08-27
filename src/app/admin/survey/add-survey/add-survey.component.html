@@ -1,1 +1,33 @@
-<p>add-survey works!</p>
+<div class="container my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <app-menu></app-menu>
+      </div>
+      <div class="col-md-9">
+<h4 class="text-center">Anket Ekle</h4>
+   
+<form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Soru Başlığı</mat-label>
+    <input matInput formControlName="title" placeholder="Soru Başlığı">
+  </mat-form-field>
+
+  <div formArrayName="options">
+    <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+      <mat-form-field appearance="fill">
+        <mat-label>Seçenek {{i + 1}}</mat-label>
+        <input matInput formControlName="optionText" placeholder="Seçenek Metni">
+      </mat-form-field>
+      <button mat-raised-button color="warn" type="button" (click)="removeOption(i)">Seçeneği Kaldır</button>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" type="button" (click)="addOption()">Seçenek Ekle</button>
+
+  <button mat-raised-button color="accent" type="submit">Kaydet</button>
+</form>
+
+      </div>
+    </div>
+
+      </div>

@@ -3,6 +3,7 @@ import { ActorService } from '../../services/actor.service';
 import { ActorDTO } from '../../model/entities/DTO/actorDTO';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { PageEvent } from '@angular/material/paginator';
+import { FileUploadEvent } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-add-actor',
@@ -12,9 +13,12 @@ import { PageEvent } from '@angular/material/paginator';
 export class AddActorComponent implements OnInit {
 
 
+
   actor: ActorDTO = {
     id: null,
-    name: ''
+    name: '',
+    imageUrl: null,
+    File: null
   };
 
   actors: ActorDTO[] = [];
@@ -59,7 +63,8 @@ export class AddActorComponent implements OnInit {
   }
 
   createActor(): void {
-    this.actorService.add(this.actor.name).subscribe({
+    this.actor.File = this.selectedFile
+    this.actorService.add(this.actor).subscribe({
       next: (resp) => {
         this.alertifyService.succes("Oyuncu başarıyla eklendi.");
         this.loadActor(this.pageIndex, this.size, this.searchKey);  // Listeyi güncelle
@@ -94,7 +99,7 @@ export class AddActorComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.actor = { id: null, name: '' };
+    this.actor = { id: null, name: '' , File:null, imageUrl:null};
     this.isEditing = false;
   }
 
@@ -109,4 +114,32 @@ export class AddActorComponent implements OnInit {
     }
   });
     }
-}
+
+   
+     
+      
+ 
+    selectedFile: File | null = null;
+
+    onUpload(event: any): void {
+      const files: File[] = event.files;
+  
+      if (files && files.length > 0) {
+          const file: File = files[0];
+  
+          const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+  
+          if (allowedTypes.includes(file.type)) {
+              this.selectedFile = file;
+              this.actor.File = this.selectedFile;
+              console.log('Dosya seçildi ve atandı:', this.actor.File); // Dosyanın atanıp atanmadığını kontrol edin
+          } else {
+              console.error('Hatalı dosya türü:', file.type);
+              alert('Yalnızca PNG, JPEG, JPG, GIF türlerinde dosyalar yüklenebilir.');
+          }
+      }
+  }
+  
+  
+
+    }

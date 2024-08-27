@@ -8,6 +8,7 @@ import { GetCategoriesComponent } from './get-categories/get-categories.componen
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddActorComponent } from './add-actor/add-actor.component';
+import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'getMovies', component: GetMoviesComponent },
   { path: 'getCategories', component: GetCategoriesComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'addActor', component: AddActorComponent }
+  { path: 'addActor', component: AddActorComponent },
+  { path:'addSurvey', component: AddSurveyComponent}
 ];
 
 @NgModule({

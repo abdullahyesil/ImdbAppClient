@@ -39,8 +39,8 @@
   }
 
   .label-box {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background-color: #1d252e;
+    border: 0.5px solid #F73859;
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
@@ -147,3 +147,62 @@
       border-color: #007bff;
       color: white;
     }
+    .carousel-item img{
+      max-height: 500px;
+    }
+    .baslik{
+      color:#F1D18A
+    }
+
+    // carousel
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: #fff;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .caption-content {
+      display: flex; /* Resim ve metni yatayda hizalar */
+      align-items: center; /* Resmi ve metni alt hizalar */
+      background-color: rgba(0, 0, 0, 0.6); /* Saydam arka plan hem resmin hem de metnin arkasında */
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .caption-content img {
+      display: flex; /* Resim ve metni yatayda hizalar */
+      align-items: flex-end; /* Resmi ve metni alt hizalar */
+      width: 150px;
+      height: auto;
+      margin-right: 20px;
+      margin-bottom: -10px; /* Resmi yukarı taşır */
+    }
+    
+    .text-content {
+      width: 100%;
+      display: inline-block;
+      vertical-align: bottom;
+      max-width: calc(100% - 170px);
+      background-color: rgba(0, 0, 0, 0.6); /* Saydam arka plan sadece metinler için */
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    .text-content h5,
+    .text-content p {
+      margin: 15px 0;
+      padding: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next
+    {
+
+      margin-bottom: 13rem;
+ 
+    }
+    

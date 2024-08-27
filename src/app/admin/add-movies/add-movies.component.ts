@@ -8,6 +8,7 @@ import { AlertifyServiceService } from '../../services/alertify-service.service'
 import { ActorService } from '../../services/actor.service';
 import { ActorDTO } from '../../model/entities/DTO/actorDTO';
 import { PageEvent } from '@angular/material/paginator';
+import { UploadEvent } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-add-movies',
@@ -32,7 +33,8 @@ export class AddMoviesComponent implements OnInit {
     private movieService: MovieService,
     private datePipe: DatePipe,
     private alertify: AlertifyServiceService,
-    private actorService:ActorService
+    private actorService:ActorService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -87,7 +89,7 @@ actorGetir(page:number, size:number, value?:string){
   }
 
 
-  addMovie(name: any, description: any, imageUrl: any, releaseDate: any, rate: any, categoryId: any, ): void {
+  addMovie(name: any, description: any, imageUrl: any, releaseDate: any, rate: any, categoryId: any): void {
     const movie: MoviesModel = {
       movieName: name.value,
       description: description.value,
@@ -95,6 +97,7 @@ actorGetir(page:number, size:number, value?:string){
       imageUrl: imageUrl.value,
       rate: parseInt(rate.value),
       categoryId: parseInt(categoryId.value),
+      ImageFile:this.selectedFile,
       actors: this.myMovieActors
     };
     console.log(movie)
@@ -111,4 +114,30 @@ actorGetir(page:number, size:number, value?:string){
       }
     );
   }
+
+
+  selectedFile: File | null = null;
+
+  onSelect(event: any): void {
+    const files: File[] = event.files;
+  
+    if (files && files.length > 0) {
+      const file: File = files[0];
+  
+      // Dosyanın türünü kontrol et
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+  
+      if (allowedTypes.includes(file.type)) {
+        this.selectedFile = file; // Dosya türü uygunsa dosyayı sakla
+        console.log('Dosya türü uygun:', file.type);
+      } else {
+        console.error('Hatalı dosya türü:', file.type);
+        alert('Yalnızca PNG, JPEG, JPG, GIF türlerinde dosyalar yüklenebilir.');
+      }
+    }
+  }
+  
+
+  
+  
 }

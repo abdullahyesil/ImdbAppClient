@@ -1,39 +1,84 @@
+<div class="container">
+
 <div *ngIf="movie else no_movie">
-    <h1>{{movie.movieName}} Film detayları</h1>
-    
     <div class="card mb-3">
         <div class="row">
             <div class="col-md-4">
-                <img [src]="movie.imageUrl" class="img-fluid rounded-start" alt="{{movie.movieName}}">
+                <img [src]="movie.imageUrl" class="img-fluid rounded-start w-100" alt="{{movie.movieName}}">
             </div>
             <div class="col-md-8">
+                <iframe width=100% height=50% 
+                src="https://www.youtube.com/embed/g-6g2uEjF1s?si=fGeITMCeEDGy1eLC "  
+                title="YouTube video player" 
+                frameborder="1" 
+                autoplay="1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen></iframe>
+
+                     <!-- Like & Dislike Buttons -->
+                     <div class="like-dislike-container">
+                    <img *ngIf="!likeActive" class="" src="/assets/icons/like.png" (click)="likeVideo()">
+                    <img *ngIf="likeActive" class="" src="/assets/icons/liked.png" (click)="likeVideo()">
+                    <img *ngIf="!dislikeActive" class="m-2" src="/assets/icons/dislike.png" (click)="dislikeVideo()">
+                    <img *ngIf="dislikeActive" class="m-2" src="/assets/icons/disliked.png" (click)="dislikeVideo()">
+                       veya istersen <label class="hand" (click)="scrollToYorumYap()" ><b>Yorum yap</b></label>
+                    </div>
+
                 <div class="card-body">
-                    <h1 class="card-title">{{movie.movieName}}</h1>
+                    <h1 class="card-title">
+                        {{movie.movieName}}
+                        <span class="star" *ngFor="let star of getStars(movie.rate)">
+                            {{star}}
+                        </span>
+                    </h1>
                     <p class="card-text">{{movie.description}}</p>
                     <b>{{movie.releaseDate | date : 'y'}}</b> yılında vizyona girmiştir.
                 </div>
             </div>
         </div>
     </div>
-<ng-template *ngIf="movie.actors.length>0 else no_Actor">
+<div *ngIf="movie.actors.length>0 else no_Actor">
     <!-- Oyuncuları Gösterme Bölümü -->
-    <h2>Oyuncular</h2>
-    <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let actor of movie.actors">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{actor.name}}</h5>
-                </div>
-            </div>
+    <h2 class="text-center">Oyuncular</h2>
+    <div class="container text-center">
+        <div class="row">
+          <div  *ngFor="let actor of movie.actors" class="col order-last">
+            <img class="rounded actor" src="{{actor.imageUrl}}">
+            <h5 class="card-title text-white">{{actor.name}}</h5>    
+          </div>
         </div>
-    </div>
-</ng-template>
+      </div>
+</div>
+
+
+
 <ng-template #no_Actor>
     <div class="alert alert-warning">Oyuncu Bulunamadı</div>
 </ng-template>
 </div>
 
 
+
 <ng-template #no_movie>
     <div class="alert alert-warning">Film Bulunamadı</div>
 </ng-template>
+<hr>
+<div id="yorumYap" class="mt-4">
+    <!-- Yorum alanınız burada -->
+    <h2>Yorum Yap</h2>
+    <textarea class="form-control" rows="4" placeholder="Yorumunuzu buraya yazın..."></textarea>
+    <button class="btn btn-primary mt-2">Gönder</button>
+</div>
+
+<div id="yorumlar" class="mt-5">
+    <h2>Yorumlar</h2>
+    <div class="card mb-3" *ngFor="let yorum of yorumlar">
+        <div class="card-body">
+            <h5 class="card-title">{{yorum.kullaniciAdi}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{yorum.tarih | date:'medium'}}</h6>
+            <p class="card-text">{{yorum.metin}}</p>
+        </div>
+    </div>
+</div>
+</div>

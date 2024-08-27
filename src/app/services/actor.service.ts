@@ -26,12 +26,19 @@ export class ActorService {
     })
   }
 
-  add(name: string, options = {}): Observable<any> {
-    let actor = { name: name };
-    return this.http.post(this.url + "addActor", actor, { ...options, observe: 'response' }).pipe(
-      catchError(this.handleError.bind(this))
+  add(model: ActorDTO, options = {}): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('name', model.name);
+    if(model.File){
+        formData.append('File', model.File);
+    }
+    console.log('FormData içeriği:', formData.get('name'), formData.get('File'));
+    return this.http.post(this.url + "addActor", formData, { ...options, observe: 'response' }).pipe(
+        catchError(this.handleError.bind(this))
     );
-  }
+}
+
+
   update(model:ActorDTO): Observable<any>{
     return this.http.put(this.url+ "updateActor/", model).pipe(
       catchError(this.handleError.bind(this))

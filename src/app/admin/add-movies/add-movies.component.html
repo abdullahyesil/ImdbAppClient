@@ -62,6 +62,19 @@
               </table>
               
             </div>
+
+
+
+            <p-fileUpload 
+    #ImageFile
+    mode="basic" 
+    chooseLabel="Choose" 
+    chooseIcon="pi pi-upload"
+    name="demo[]" 
+    accept="image/*" 
+    maxFileSize="1000000" 
+    (onSelect)="onSelect($event)" /> 
+
           </form>
         </div>
         <!-- Oyuncu Arama ve Listeleme Alanı -->
