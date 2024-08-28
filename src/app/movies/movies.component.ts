@@ -57,18 +57,23 @@ pageIndex:number = 0;
     });
   }
 
-  loadMovies(page:number, size:number, searchKey:string, categoryId?:number) {
-
-    this.movieService.getMoviesPage(page, size, searchKey).subscribe(resp=>
-      {this.movies = resp.movies
-      this.filtredMovies = resp.movies
-      this.totalCount = resp.totalCount
-      this.loading = false}
-    )
-
- 
-    
+  loadMovies(page: number, size: number, searchKey: string, categoryId?: number) {
+    this.movieService.getMoviesPage(page, size, searchKey).subscribe(
+      resp => {
+        this.movies = resp.movies;
+        this.filtredMovies = resp.movies;
+        this.totalCount = resp.totalCount;
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        this.error = error;
+        console.error('Error loading movies:', error);
+        this.alertify.error('Bir hata oluştu, lütfen tekrar deneyin.');
+      }
+    );
   }
+  
 
   onInputChange(event: any): void {
     const inputValue = event.target.value;
@@ -85,7 +90,6 @@ pageIndex:number = 0;
     this.rows = event.rows ?? 10;
     this.pageIndex = event.first / event.rows;
     this.loadMovies(this.pageIndex, this.rows, this.filterText)
-  
   }
 
   addToList(event: any, item: MoviesModel) {

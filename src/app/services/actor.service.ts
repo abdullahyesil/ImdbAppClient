@@ -40,7 +40,15 @@ export class ActorService {
 
 
   update(model:ActorDTO): Observable<any>{
-    return this.http.put(this.url+ "updateActor/", model).pipe(
+
+    const formData: FormData = new FormData();
+    formData.append('id', model.id.toString())
+     formData.append('name', model.name)
+     if(model.File){
+      formData.append('File', model.File);
+    }
+
+    return this.http.put(this.url+ "updateActor/", formData).pipe(
       catchError(this.handleError.bind(this))
     );
   }

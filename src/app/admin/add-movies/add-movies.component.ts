@@ -89,7 +89,7 @@ actorGetir(page:number, size:number, value?:string){
   }
 
 
-  addMovie(name: any, description: any, imageUrl: any, releaseDate: any, rate: any, categoryId: any): void {
+  addMovie(name: any, description: any, imageUrl: any, releaseDate: any, rate: any, categoryId: any, trailer:any): void {
     const movie: MoviesModel = {
       movieName: name.value,
       description: description.value,
@@ -98,6 +98,8 @@ actorGetir(page:number, size:number, value?:string){
       rate: parseInt(rate.value),
       categoryId: parseInt(categoryId.value),
       ImageFile:this.selectedFile,
+      trailer:trailer.value,
+      CarouselImageFile: this.carouselFile,
       actors: this.myMovieActors
     };
     console.log(movie)
@@ -117,6 +119,7 @@ actorGetir(page:number, size:number, value?:string){
 
 
   selectedFile: File | null = null;
+  carouselFile:File | null = null;
 
   onSelect(event: any): void {
     const files: File[] = event.files;
@@ -137,6 +140,24 @@ actorGetir(page:number, size:number, value?:string){
     }
   }
   
+  onSelectCarousel(event: any): void {
+    const files: File[] = event.files;
+  
+    if (files && files.length > 0) {
+      const file: File = files[0];
+  
+      // Dosyanın türünü kontrol et
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+  
+      if (allowedTypes.includes(file.type)) {
+        this.carouselFile = file; // Dosya türü uygunsa dosyayı sakla
+        console.log('Dosya türü uygun:', file.type);
+      } else {
+        console.error('Hatalı dosya türü:', file.type);
+        alert('Yalnızca PNG, JPEG, JPG, GIF türlerinde dosyalar yüklenebilir.');
+      }
+    }
+  }
 
   
   

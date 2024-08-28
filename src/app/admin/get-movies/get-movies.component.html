@@ -7,7 +7,7 @@
       <div class="mb-3">
         <input
             [(ngModel)]="filterText"
-            (keyup)="onInputChance()"
+            (keyup)="onInputChange($event)"
             type="text"
             class="form-control"
             placeholder="Film ara.."
@@ -15,17 +15,8 @@
         <small class="text-muted" *ngIf="filterText"> Aradığınız kelime {{filterText}}</small>
     </div>
 
-
-    <h2 *ngIf="isUserActive == true; else no_movies"> Kullanıcı aktif</h2>
-        
-    <ng-template #no_movies>
-      <div class="alert alert-warning">Kullanıcı aktif değil</div>
-    </ng-template>
-
-
-
       <div class="row">
-        <div class="col-md-6 mb-3" *ngFor="let item of filtredMovies">
+        <div class="col-md-6 mb-3" *ngFor="let item of movies">
           <div class="card" style="width: 100%;">
             <img class="card-img-top" src="{{item.imageUrl}}" alt="Card image cap">
             <div class="card-body">
@@ -40,4 +31,11 @@
 
     </div>
   </div>
+
+  <p-paginator 
+  (onPageChange)="onPageChange($event)" 
+  [first]="first"
+  [rows]="rows" 
+  [totalRecords]="totalCount" 
+  [rowsPerPageOptions]="[10, 20, 30]" />
 </div>

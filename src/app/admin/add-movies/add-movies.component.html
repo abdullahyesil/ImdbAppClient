@@ -25,6 +25,11 @@
               <input #imageUrl type="text" class="form-control" id="imageUrl"
                 placeholder="https://ornek.com/filmresmi.png">
             </div>
+            <div class="form-group col-md-12 mb-2">
+              <label for="trailer">Trailer (Youtube) :</label>
+              <input #trailer type="text" class="form-control" id="trailer"
+                placeholder="https://youtube.com/videoadresi">
+            </div>
             <mat-form-field class="w-100">
               <mat-label>Lütfen bir tarih seçin..</mat-label>
               <input matInput [matDatepicker]="releaseDate" #releaseDate2>
@@ -63,17 +68,25 @@
               
             </div>
 
-
-
             <p-fileUpload 
     #ImageFile
     mode="basic" 
-    chooseLabel="Choose" 
+    chooseLabel="Poster Image" 
     chooseIcon="pi pi-upload"
     name="demo[]" 
     accept="image/*" 
     maxFileSize="1000000" 
     (onSelect)="onSelect($event)" /> 
+
+    <p-fileUpload 
+    #ImageFile
+    mode="basic" 
+    chooseLabel="Carousel Image" 
+    chooseIcon="pi pi-upload"
+    name="demo[]" 
+    accept="image/*" 
+    maxFileSize="1000000" 
+    (onSelect)="onSelectCarousel($event)" /> 
 
           </form>
         </div>
@@ -107,7 +120,7 @@
       </div>
 
       <div class="mt-2">
-        <button type="button" (click)="addMovie(movieName, description, imageUrl, releaseDate2, rate, categoryId)"
+        <button type="button" (click)="addMovie(movieName, description, imageUrl, releaseDate2, rate, categoryId, trailer)"
           class="btn btn-primary">Filmi Ekle</button>
       </div>
     </div>

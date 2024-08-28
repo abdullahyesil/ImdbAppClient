@@ -10,3 +10,40 @@
 .mylist{
     cursor: pointer;
 }
+.mat-button-toggle-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: none;
+  }
+  
+  .mat-button-toggle {
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .mat-button-toggle svg {
+    fill: #000000; /* Varsayılan ikon rengi */
+    transition: fill 0.3s;
+  }
+  
+  .mat-button-toggle:hover {
+    background-color: #F73859;
+    border-color: #ffffff;
+  }
+  
+  .mat-button-toggle.mat-button-toggle-checked {
+    background-color: #F1D18A;
+  }
+  
+  .mat-button-toggle.mat-button-toggle-checked svg {
+    fill: #000000; /* Seçili durumdaki ikon rengi */
+  }
+  
+  .mat-button-toggle-checked {
+    color: #ff8902;
+  }
+  

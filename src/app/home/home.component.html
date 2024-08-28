@@ -1,5 +1,84 @@
 <div class="container my-3">
   <div class="row">
+
+    <div class="col-md-9">
+
+      <!-- hikayeler -->
+      <div class="container mt-3">
+        <div class="row justify-content-center">
+
+          <div *ngFor="let item of StoryModel" class="col-auto">
+            <div class="story">
+              <img src="{{item.imgUrl}}" routerLink="/movies/{{item.movieId}}" class="img-fluid rounded-circle" alt="{{item.imgUrl}}">
+              <p class="text-center ">{{item.name}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <hr />
+      <h5 class="text-center display-6 baslik">Popüler Filmler</h5>
+      <div>
+        <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let item of movieModel" class="carousel-item active">
+        <img src="{{item.imageUrl}}" class="d-block w-100" alt="{{item.movieName}}">
+      </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div> -->
+
+        <div id="carouselExampleCaptions" class="carousel slide">
+          <div class="carousel-indicators">
+            <button *ngFor="let item of movieModel; let i = index" type="button"
+              data-bs-target="#carouselExampleCaptions" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+              [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
+            </button>
+          </div>
+          <div class="carousel-inner">
+            <div *ngFor="let item of movieModel; let i = index" class="carousel-item" [class.active]="i === 0">
+              <img src="{{item.carouselImage}}" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <a routerLink="/movies/{{item.id}}"><img
+                    src="{{item.imageUrl}}"
+                    class="img-fluid img border foto"> </a>
+                <div class="text-content">
+                  <a routerLink="/movies/{{item.id}}" class="text-decoration-none text-white" href="#">
+                    <h5>{{item.movieName}}
+                    </h5>
+                  </a>
+                  <p>{{item.description| ozet: 250}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Geri</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">İleri</span>
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+
     <div class="col-md-3">
 
       <div>
@@ -161,85 +240,6 @@
           </a>
         </div>
       </div>
-
-    </div>
-    <div class="col-md-9">
-
-      <!-- hikayeler -->
-      <div class="container mt-3">
-        <div class="row justify-content-center">
-
-          <div *ngFor="let item of StoryModel" class="col-auto">
-            <div class="story">
-              <img src="{{item.imgUrl}}" class="img-fluid rounded-circle" alt="{{item.imgUrl}}">
-              <p class="text-center ">{{item.name}}</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <hr />
-      <h5 class="text-center display-6 baslik">Popüler Filmler</h5>
-      <div>
-        <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div *ngFor="let item of movieModel" class="carousel-item active">
-        <img src="{{item.imageUrl}}" class="d-block w-100" alt="{{item.movieName}}">
-      </div>
-
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div> -->
-
-        <div id="carouselExampleCaptions" class="carousel slide">
-          <div class="carousel-indicators">
-            <button *ngFor="let item of movieModel; let i = index" type="button"
-              data-bs-target="#carouselExampleCaptions" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
-              [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
-            </button>
-          </div>
-          <div class="carousel-inner">
-            <div *ngFor="let item of movieModel; let i = index" class="carousel-item" [class.active]="i === 0">
-              <img src="{{item.imageUrl}}" class="d-block w-100">
-              <div class="carousel-caption d-none d-md-block">
-                <a routerLink="/movies/{{item.id}}"><img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTuniQHUjdbOxjihSd4qxQWyZLVgJk3Mw1fA&s"
-                    class="img-fluid img border"> </a>
-                <div class="text-content">
-                  <a routerLink="/movies/{{item.id}}" class="text-decoration-none text-white" href="#">
-                    <h5>{{item.movieName}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, facilis.
-                    </h5>
-                  </a>
-                  <p>{{item.movieName | ozet: 100}} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia
-                    recusandae, commodi eaque culpa qui expedita nihil accusamus non labore dicta. Aut amet ex nihil
-                    tempora quas ratione error hic totam.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Geri</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">İleri</span>
-          </button>
-        </div>
-
-      </div>
-
 
     </div>
   </div>

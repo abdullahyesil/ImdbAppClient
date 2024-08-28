@@ -3,7 +3,7 @@ import { ActorService } from '../../services/actor.service';
 import { ActorDTO } from '../../model/entities/DTO/actorDTO';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { PageEvent } from '@angular/material/paginator';
-import { FileUploadEvent } from 'primeng/fileupload';
+import { FileUploadEvent, UploadEvent } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-add-actor',
@@ -83,6 +83,7 @@ export class AddActorComponent implements OnInit {
 
   updateActor(): void {
     if (this.actor.id) {
+      this.actor.File = this.selectedFile
       this.actorService.update(this.actor).subscribe({
         next: (resp) => {
           this.alertifyService.succes("Oyuncu başarıyla güncellendi.");
@@ -106,21 +107,20 @@ export class AddActorComponent implements OnInit {
   delete(id: number) {
     this.actorService.delete(id).subscribe({
        next: (resp) => {
-      this.alertifyService.succes("Oyuncu başarıyla silindi.");
-      this.loadActor(this.pageIndex, this.size, this.searchKey);  // Listeyi güncelle
+
+        if(!!resp.isSucceed){
+          this.alertifyService.succes("Oyuncu başarıyla silindi.");
+          this.loadActor(this.pageIndex, this.size, this.searchKey);  // Listeyi güncelle
+        }
     },
     error: (err) => {
       this.alertifyService.error("Oyuncu silinirken bir hata oluştu.");
     }
   });
     }
-
-   
-     
-      
- 
+    
     selectedFile: File | null = null;
-
+showFileUpload: boolean = true;
     onUpload(event: any): void {
       const files: File[] = event.files;
   
@@ -138,8 +138,15 @@ export class AddActorComponent implements OnInit {
               alert('Yalnızca PNG, JPEG, JPG, GIF türlerinde dosyalar yüklenebilir.');
           }
       }
+
+        // Dosya seçimini tamamladıktan sonra bileşeni yeniden oluşturmak için:
+    this.showFileUpload = false;
+    setTimeout(() => {
+        this.showFileUpload = true;
+    }, 0);
   }
   
+
   
 
     }

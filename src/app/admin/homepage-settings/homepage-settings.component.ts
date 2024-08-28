@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddStoryComponent } from '../add-story/add-story.component';
 import { imdbStoryModel } from '../../model/entities/imdbStory';
+import { AlertifyServiceService } from '../../services/alertify-service.service';
 
 @Component({
   selector: 'app-homepage-settings',
@@ -36,6 +37,7 @@ readonly dialog = inject(MatDialog)
     private surveyService: SurveyService,
     private movieService: MovieService,
     private adminService: AdminService,
+    private alertify: AlertifyServiceService,
     private fb: FormBuilder,
   ) {}
 
@@ -172,9 +174,20 @@ readonly dialog = inject(MatDialog)
     console.log(this.settingsForm.value)
     if (this.settingsForm.valid) {
       console.log('Form Submitted!', this.settingsForm.value);
-        this.adminService.updateHomePage(this.settingsForm.value).subscribe(resp=> console.log(resp))
+        this.adminService.updateHomePage(this.settingsForm.value).subscribe(resp=> 
+
+         {if(!!resp.isSucceed){
+
+            this.alertify.succes(resp.message)
+         }
+
+         else{
+            this.alertify.warning("Bilinmeyen hata")
+         }
+
+       }) 
     } else {
-      console.log('Form is not valid!');
+      this.alertify.error("Form geçerli değil. Lütfen kontrol ediniz")
     }
   }
 

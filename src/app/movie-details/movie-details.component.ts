@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
 import { MoviesModel } from '../model/entities/movies.model';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-details',
@@ -13,11 +14,14 @@ export class MovieDetailsComponent implements OnInit {
 
 
   movie: MoviesModel;
-
+  safeUrl: SafeResourceUrl;
  constructor(
     private movieService: MovieService,
-    private activaedroot: ActivatedRoute
+    private activaedroot: ActivatedRoute,
+    private dom:DomSanitizer
+    
   ){  }
+  
   ngOnInit(): void {
   
 
@@ -26,6 +30,7 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieById(params["id"]).subscribe
       (data => {
         this.movie = data;
+        this.safeUrl = this.dom.bypassSecurityTrustResourceUrl(this.movie.trailer);
       });
     })
 }

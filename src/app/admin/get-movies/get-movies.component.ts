@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { UpdateMoviesComponent } from '../update-movies/update-movies.component';
 import { UserauthService } from '../../services/userauth.service';
+import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-get-movies',
@@ -14,34 +15,42 @@ import { UserauthService } from '../../services/userauth.service';
 export class GetMoviesComponent implements OnInit{
   filterText:string = "";
   movies: MoviesModel[] = [];
-  filtredMovies: MoviesModel[];
   readonly dialog = inject(MatDialog);
-  isUserActive: boolean= false;
+  totalCount:number= 0;
+  first: number = 0;
+  rows: number = 10;
+pageIndex:number = 0;
 constructor(
  private movieService: MovieService,
  private alertify:AlertifyServiceService,
-private authService:UserauthService
+
 ){}
 
   ngOnInit(): void {
-      this.movieService.getMovies(null).subscribe(data => {
-
-        this.movies = data;
-        this.filtredMovies = this.movies;
-      });
+    this.loadMovies(this.pageIndex, this.rows, "")
         
-       console.log(this.authService.user.value.token2)
+     
+  }
+
+  loadMovies(page:number, size:number, searchKey:string) {
+
+    this.movieService.getMoviesPage(page, size, searchKey).subscribe(resp=>
+      {this.movies = resp.movies
+      this.totalCount = resp.totalCount
+     }
+    )
   }
 
 
-  onInputChance(){
-    console.log(this.filterText);
-    this.filtredMovies = this.filterText ?
-      this.movies.filter(m => 
-        m.movieName.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1 || 
-        m.description.toLowerCase().indexOf(this.filterText.toLowerCase()) !== -1
-      ) :
-      this.movies;
+
+  onInputChange(event: any): void {
+    const inputValue = event.target.value;
+    // Burada girdiği metne göre işlem yapabilirsiniz
+    // Örneğin, bir arama işlemi başlatabilirsiniz
+    this.filterText = inputValue;
+
+    // Örneğin bir arama fonksiyonunu çağırabilirsiniz
+    this.loadMovies(this.pageIndex, this.rows, this.filterText)
   }
 
   openUpdateMovieModal(id:number){
@@ -49,11 +58,13 @@ private authService:UserauthService
 
   }
 
-  aktifMi(user:any){
-    if(user){
 
-      this.isUserActive=true
-    }
 
+  onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 10;
+    this.pageIndex = event.first / event.rows;
+    this.loadMovies(this.pageIndex, this.rows, this.filterText)
   }
+
 }

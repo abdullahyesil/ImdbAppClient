@@ -8,6 +8,13 @@
     height: auto; /* Yüksekliği otomatik ayarla */
     display: inline-block; /* Resmi inline blok olarak ayarla */
   }
+  ::ng-deep .mdc-tab__text-label {
+    color: #f3f3f3 !important; /* Başlık metin rengini beyaz yap */
+}
 
+::ng-deep .mat-mdc-tab.mat-mdc-tab--active .mdc-tab__text-label {
+    color: #ffffff !important; /* Aktif olan tab başlık rengini beyaz yap */
+    background-color: #F73859 !important; /* Aktif olan tab için arka plan rengini koyu gri yap */
+}
   
 @import "primeicons/primeicons.css";

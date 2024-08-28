@@ -7,6 +7,9 @@ import { CategoryModel } from '../../model/category.model';
 import { CategoryService } from '../../services/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ActorDTO } from '../../model/entities/DTO/actorDTO';
+import { PageEvent } from '@angular/material/paginator';
+import { ActorService } from '../../services/actor.service';
 
 @Component({
   selector: 'app-update-movies',
@@ -16,15 +19,24 @@ import { DatePipe } from '@angular/common';
 })
 export class UpdateMoviesComponent implements OnInit {
 
+
  movie:MoviesModel;
  MovieId:number;
  categories: CategoryModel[];
  selectedCategoryId:number;
+ totalCount:number;
+ size:number=10;
+ pageIndex:number=0;
+ actorModel:ActorDTO[]= [];
+ searchKey:string = "";
+ myMovieActors: ActorDTO[] = []
+
 
  constructor(
   private movieService: MovieService,
   private categoryService: CategoryService,
   @Inject (MAT_DIALOG_DATA) public data:MoviesModel,
+  private actorService:ActorService,
   private datePipe: DatePipe,
 ){
 
@@ -37,8 +49,12 @@ export class UpdateMoviesComponent implements OnInit {
     this.movieService.getMovieById(this.data.id).subscribe(veri => {
       this.movie=veri;  
       this.selectedCategoryId = this.movie.categoryId
+      this.myMovieActors = this.movie.actors
   
     });
+
+//  oyuncu getir
+this.actorGetir( this.pageIndex, this.size,this.searchKey )
 
       //kategori listesi
       this.categoryService.getCategories().subscribe(data=>
@@ -60,11 +76,12 @@ export class UpdateMoviesComponent implements OnInit {
           }
         }
       
-      updateMovie(id:any, movieName:any, description:any, imageUrl:any, releaseDate:any, rate:any, categoryId:any){
+      updateMovie(id:any, movieName:any, description:any, imageUrl:any, releaseDate:any, rate:any, categoryId:any, trailer:any){
       
 
         console.log(releaseDate.value);
-        console.log(this.formatDate(releaseDate.value));
+        console.log(trailer.value);
+      
         
         
         var movie: MoviesModel={ 
@@ -74,12 +91,51 @@ export class UpdateMoviesComponent implements OnInit {
           releaseDate: this.formatDate(releaseDate.value),
           imageUrl: imageUrl.value,
           rate: parseInt(rate.value),
-          categoryId: parseInt(categoryId.value)
+          trailer: trailer.value,
+          categoryId: parseInt(categoryId.value),
+          actors:this.myMovieActors
           };
-      
+          console.log(movie)
           return this.movieService.updateMovie(movie).subscribe(data => console.log(data));
       
       }
  
 
+      onPageChange(event: PageEvent) {
+        this.pageIndex = event.pageIndex;
+        this.size = event.pageSize;
+        
+        // Burada API'yi tekrar çağırarak, belirli sayfa boyutuna göre verileri çekebilirsiniz
+        this.actorGetir(this.pageIndex, this.size, this.searchKey);
+       
+      }
+
+      search(event:string){
+        this.searchKey = event
+        this.actorGetir( this.pageIndex, this.size, this.searchKey)
+      
+      }
+          
+
+      actorGetir(page:number, size:number, value?:string){
+
+        this.actorService.get(page,this.size,value).subscribe(resp=> {
+          this.actorModel = resp.actors
+          this.totalCount = resp.totalCount
+        })
+      
+      }
+
+
+      AddMyMovieActor(item:ActorDTO) {
+    
+        if(!this.myMovieActors.includes(item))
+          this.myMovieActors.push(item)
+        }
+    
+        deleteMyMovieActor(_t66: ActorDTO) {
+          this.myMovieActors = this.myMovieActors.filter(m => m.name !== _t66.name);
+          }
+          
+      
 }

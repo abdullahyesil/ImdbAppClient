@@ -29,7 +29,7 @@ export class AdminService {
 return this.http.get<homePageSettings>(this.url+"HomeSettings")
   }
 
-  updateHomePage(model:homePageSettings){
+  updateHomePage(model:homePageSettings):Observable<any>{
     return this.http.put(this.url+"HomeSettings", model)
   }
 

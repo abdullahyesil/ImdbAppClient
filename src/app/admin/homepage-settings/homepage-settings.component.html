@@ -3,14 +3,13 @@
     <label for="h1Name">H1 Name</label>
     <input type="text" id="h1Name" name="h1Name" formControlName="h1Name">
     <div *ngIf="settingsForm.get('h1Name').invalid && settingsForm.get('h1Name').touched" class="text-danger">
-      H1 Name is required
+     Ana başlığı girmek zorundasınız!
     </div>
   </div>
 
   <div class="form-group">
     <label for="surveys">Surveys</label>
     <mat-slide-toggle [checked]="isSurvey" (click)="openSurvey(isSurvey)" formControlName="surveys">
-      Enable Survey {{isSurvey}}
     </mat-slide-toggle>
   </div>
 
@@ -18,7 +17,7 @@
     <label for="surveyId">Survey ID</label>
     <input type="number" id="surveyId" name="surveyId" formControlName="surveyId">
     <div *ngIf="settingsForm.get('surveyId').invalid && settingsForm.get('surveyId').touched" class="text-danger">
-      Survey ID is required
+    Anket Id'sini girmek zorundasınız!
     </div>
   </div>
 
@@ -38,13 +37,13 @@
   <div class="form-group">
     <label for="imdbAppStory">IMDb App Story</label>
     <mat-slide-toggle [checked]="isImdbStory" (click)="openStory(isImdbStory)" formControlName="imdbAppStory">
-      Enable App Story
+  
     </mat-slide-toggle>
   </div>
 <button *ngIf="isImdbStory" type="button"  (click)=" openDialog()" class="btn btn-info">Story Ekle</button>
   <div *ngIf="isImdbStory" class="form-group">
     <label for="imdbAppStoryId">IMDb App Story ID (List)</label>
-    <input type="text" id="imdbAppStoryId" name="imbdbAppStoryId" formControlName="imdbAppStoryId" placeholder="Comma separated values">
+    <input type="hidden" id="imdbAppStoryId" name="imbdbAppStoryId" formControlName="imdbAppStoryId" placeholder="Comma separated values">
     <div *ngIf="settingsForm.get('imdbAppStoryId').invalid && settingsForm.get('imdbAppStoryId').touched" class="text-danger">
       IMDb App Story ID is required
     </div>

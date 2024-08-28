@@ -19,18 +19,18 @@
                       <input type="text" id="actorName" class="form-control" placeholder="Oyuncu adı girin"
                         [(ngModel)]="actor.name" name="name" required>
                     </div>
-    
+                    <div *ngIf="showFileUpload">
                       <p-fileUpload 
-                      #File
-                      mode="basic" 
-                      chooseLabel="Resim yükle" 
-                      chooseIcon="pi pi-upload"
-                      name="demo[]" 
-                      accept="image/*" 
-                      maxFileSize="1000000" 
-                      (onSelect)="onUpload($event)" />
-           
-
+                          #File
+                          mode="basic" 
+                          chooseLabel="Resim yükle" 
+                          chooseIcon="pi pi-upload"
+                          name="demo[]" 
+                          accept="image/*" 
+                          maxFileSize="1000000" 
+                          (onSelect)="onUpload($event)" />
+                  </div>
+                    
                     <button type="submit" class="btn btn-primary m-2">{{ isEditing ? 'Güncelle' : 'Ekle' }}</button>
                     <button type="button" class="btn btn-secondary m-2" *ngIf="isEditing" (click)="resetForm()">İptal</button>
                   </form>

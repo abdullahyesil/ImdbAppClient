@@ -19,6 +19,7 @@ export class AddStoryComponent implements OnInit {
     this.storyForm = this.fb.group({
       name: ['', Validators.required],
       imgUrl: ['', Validators.required],
+      movieId: ['', Validators.required]
     });
   }
 

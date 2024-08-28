@@ -2,9 +2,9 @@ form {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+
     border-radius: 8px;
-    background-color: #f9f9f9;
+
   }
   
   form div {
@@ -92,3 +92,23 @@ form {
     background-color: #218838;
   }
   
+  .mat-tab{
+    color: #f3f3f3;
+  }
+
+::ng-deep .mdc-tab__text-label {
+    color: #f3f3f3 !important; /* Başlık metin rengini beyaz yap */
+}
+
+::ng-deep .mat-mdc-tab.mat-mdc-tab--active .mdc-tab__text-label {
+    color: #ffffff !important; /* Aktif olan tab başlık rengini beyaz yap */
+    background-color: #F73859 !important; /* Aktif olan tab için arka plan rengini koyu gri yap */
+}
+
+::ng-deep .mat-mdc-tab.mat-mdc-tab--active .mat-mdc-tab-labels {
+  background-color: #F73859 !important; /* Aktif olan tab için arka plan rengini kırmızı yap */
+}
+
+::ng-deep .mat-mdc-tab-indicator {
+    background-color: #f3f3f3 !important; /* Altındaki seçili tabı gösteren barın rengini beyaz yap */
+}

@@ -38,6 +38,8 @@ getMoviesPage(page:number, size:number, searchKey:string, categoryId?:number)
     })
   }
 
+
+
   return this.http.get<any>(this.url+ "/Movie", {
     params: {
       page:page,
@@ -64,6 +66,8 @@ getMoviesPage(page:number, size:number, searchKey:string, categoryId?:number)
   formData.append('imageUrl', movie.imageUrl);
   formData.append('rate', movie.rate.toString());
   formData.append('categoryId', movie.categoryId.toString());
+  formData.append('trailer', movie.trailer)
+
 
   // Aktör ID'leri ve adlarını ekleyin
   movie.actors.forEach((actor, index) => {
@@ -76,6 +80,10 @@ getMoviesPage(page:number, size:number, searchKey:string, categoryId?:number)
     formData.append('ImageFile', movie.ImageFile);
   }
 
+    formData.append('CarouselImageFile', movie.CarouselImageFile)
+  
+
+
   // HTTP POST isteğini gönderin
   return this.http.post(newUrl, formData);
 }
@@ -83,9 +91,34 @@ getMoviesPage(page:number, size:number, searchKey:string, categoryId?:number)
 
 
 updateMovie(movie:MoviesModel){
+
+    // FormData oluşturun ve movie model verilerini ekleyin
+    const formData = new FormData();
+    formData.append('movieName', movie.movieName);
+    formData.append('description', movie.description);
+    formData.append('releaseDate', movie.releaseDate.toString());  // Date'i ISO formatında ekleyin
+    formData.append('imageUrl', movie.imageUrl);
+    formData.append('rate', movie.rate.toString());
+    formData.append('categoryId', movie.categoryId.toString());
+    formData.append('trailer', movie.trailer)
+    formData.append('id', movie.id.toString())
+  
+
+  // Aktör ID'leri ve adlarını ekleyin
+  movie.actors.forEach((actor, index) => {
+    formData.append(`actors[${index}].id`, actor.id.toString());
+    formData.append(`actors[${index}].name`, actor.name);
+  });
+ // Dosya verisini FormData'ya ekleyin (eğer varsa)
+ if (movie.ImageFile) {
+  formData.append('ImageFile', movie.ImageFile);
+}
+
+    
+
   let newUpdateUrl= this.url + '/movie/updateMovie/' +movie.id;
 
-  return this.http.put<MoviesModel>(newUpdateUrl,movie)
+  return this.http.put<MoviesModel>(newUpdateUrl,formData)
 }
 
 voteMovie(movie:MoviesModel, verilenOy:number){
@@ -94,6 +127,10 @@ voteMovie(movie:MoviesModel, verilenOy:number){
 
 getMovieIds(ids:number[]):Observable<MoviesModel[]>{
 return this.http.post<MoviesModel[]>(this.url+ "/Movie/MovieIds/", ids)
+}
+
+deleteMovie(id:number){
+return this.http.delete(this.url+"/Movie/delete/" + id)
 }
 
 }

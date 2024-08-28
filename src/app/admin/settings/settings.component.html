@@ -4,8 +4,8 @@
         <app-menu></app-menu>
       </div>
       <div class="col-md-9">
-        <mat-tab-group>
-          <mat-tab label="Site Ayarları">
+        <mat-tab-group class="mat-tab">
+          <mat-tab  class="custom" label="Site Ayarları">
             <form>
                 <div>
                   <label for="id">ID:</label>
@@ -28,7 +28,7 @@
                   <button type="button" (click)="addMeta(metaInput.value)">Add Meta</button>
                   <ul>
                     <li *ngFor="let meta of siteSettings.meta">
-                      {{meta}} <button type="button" (click)="removeMeta(meta)">Remove</button>
+                     <label class="text-dark"> {{meta}}</label> <button type="button" (click)="removeMeta(meta)">Remove</button>
                     </li>
                   </ul>
                 </div>

@@ -31,6 +31,7 @@ import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
 import { AddStoryComponent } from './add-story/add-story.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { BadgeModule } from 'primeng/badge';
     MatExpansionModule,
     MatPaginatorModule,
     MatSlideToggleModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginatorModule
   
   ]
 })
