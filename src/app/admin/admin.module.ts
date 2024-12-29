@@ -32,6 +32,7 @@ import { AddStoryComponent } from './add-story/add-story.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
 import { PaginatorModule } from 'primeng/paginator';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PaginatorModule } from 'primeng/paginator';
     HomepageSettingsComponent,
     AddSurveyComponent,
     AddStoryComponent,
+    CommentsComponent,
   ],
   imports: [
     CommonModule,

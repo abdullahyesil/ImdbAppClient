@@ -19,15 +19,15 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="about">Hakkında</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="admin" aria-disabled="false">Admin</a>
+        <li class="nav-item mt-1">
+          <button mat-button [matMenuTriggerFor]="menu"><i class="bi bi-person-circle fs-1"></i></button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="!isAuthenticated"  (click)="openDialog()" mat-menu-item><i class="fa fa-sign-in" aria-hidden="true"></i> Giriş Yap</button>
+            <button *ngIf="!isAuthenticated"  mat-menu-item> <i class="fa fa-user-plus" aria-hidden="true"></i> Kayıt Ol</button>
+            <button *ngIf="isAdmin" routerLink="/admin" mat-menu-item> <i class="fa fa-sign-out" aria-hidden="true"></i> Admin</button>
+            <button *ngIf="isAuthenticated" (click)="cikisYap()"  mat-menu-item> <i class="fa fa-sign-out" aria-hidden="true"></i> Çıkış Yap</button>
+          </mat-menu>
         </li>
-        <!-- <li *ngIf="!isAuthenticated"  class="nav-item">
-          <a class="btn btn-primary"  routerLink="auth" aria-disabled="false">Auth</a>
-        </li>
-        <li  *ngIf="isAuthenticated"  class="nav-item">
-          <a class="btn btn-primary " routerLink="logout" aria-disabled="false">LogOut</a>
-        </li> -->
       </ul>
     </div>
   </div>

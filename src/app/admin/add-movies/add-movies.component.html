@@ -68,25 +68,30 @@
               
             </div>
 
-            <p-fileUpload 
-    #ImageFile
-    mode="basic" 
-    chooseLabel="Poster Image" 
-    chooseIcon="pi pi-upload"
-    name="demo[]" 
-    accept="image/*" 
-    maxFileSize="1000000" 
-    (onSelect)="onSelect($event)" /> 
+    <div class="mb-3">
+      <label for="formFilePoster" class="form-label">Poster Image</label>
+      <input 
+        #ImageFilePoster
+        class="form-control" 
+        type="file" 
+        id="formFilePoster" 
+        accept="image/*" 
+        (change)="onFileSelect($event, 'poster')"/> 
+    </div>
+    
 
-    <p-fileUpload 
-    #ImageFile
-    mode="basic" 
-    chooseLabel="Carousel Image" 
-    chooseIcon="pi pi-upload"
-    name="demo[]" 
-    accept="image/*" 
-    maxFileSize="1000000" 
-    (onSelect)="onSelectCarousel($event)" /> 
+    <div class="mb-3">
+      <label for="formFileCarousel" class="form-label">Carousel Image</label>
+      <input 
+        #ImageFileCarousel
+        class="form-control" 
+        type="file" 
+        id="formFileCarousel" 
+        accept="image/*" 
+        (change)="onFileSelect($event, 'carousel')"/> 
+    </div>
+    
+
 
           </form>
         </div>

@@ -88,3 +88,10 @@
     font-size: 1rem;
     color: #f0c509;
 }
+
+::ng-deep .p-progressbar {
+ max-width: 50%;
+}
+::ng-deep .p-progressbar-value {
+background-color: #137200;
+}

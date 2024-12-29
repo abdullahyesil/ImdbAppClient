@@ -15,9 +15,14 @@ export class SurveyService {
 url = "http://localhost:5048/api/Admin/Survey/";
 
 
-getAll():Observable<SurveysModel[]>{
+getAll(page:number, size:number):Observable<any>{
   
- return this.http.get<SurveysModel[]>(this.url)
+ return this.http.get<any>(this.url, {
+  params:{
+    page:page,
+    size:size
+  }
+ })
 }
 getbyId(id:number):Observable<SurveysModel>{
 

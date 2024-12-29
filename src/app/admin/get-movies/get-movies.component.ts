@@ -4,7 +4,6 @@ import { MoviesModel } from '../../model/entities/movies.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertifyServiceService } from '../../services/alertify-service.service';
 import { UpdateMoviesComponent } from '../update-movies/update-movies.component';
-import { UserauthService } from '../../services/userauth.service';
 import { PaginatorState } from 'primeng/paginator';
 
 @Component({

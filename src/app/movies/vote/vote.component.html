@@ -16,8 +16,6 @@
     }" aria-hidden="true"></i>
   </div>
   <div class="dialog-content">
-    <!-- Dialog içeriği buraya gelebilir -->
-    
     <mat-dialog-content>       
       <div class="container">
           <p>"Film için puanınızı belirlemek için yıldızlardan birine dokunun."</p>
@@ -31,10 +29,7 @@
           <p></p>
         </div>
     </mat-dialog-content>
-    <div *ngIf="bilgi" class="alert alert-success">Tebrikler başarıyla oyunuz kullanıldı.</div>
-  
-  
-  
+    <div [ngClass]="bilgiClass==true ? 'alert-success' : 'alert-danger'" *ngIf="!!bilgi" class="alert">{{bilgi}}</div>
 <mat-dialog-actions>
   <button class="btn btn-primary" mat-dialog-close>Kapat</button>
 </mat-dialog-actions>

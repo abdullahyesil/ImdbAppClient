@@ -9,6 +9,7 @@ import { UpdateCategoriesComponent } from './update-categories/update-categories
 import { SettingsComponent } from './settings/settings.component';
 import { AddActorComponent } from './add-actor/add-actor.component';
 import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
+import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'getCategories', component: GetCategoriesComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'addActor', component: AddActorComponent },
-  { path:'addSurvey', component: AddSurveyComponent}
+  { path:'addSurvey', component: AddSurveyComponent},
+  {path: 'comments', component: CommentsComponent}
 ];
 
 @NgModule({

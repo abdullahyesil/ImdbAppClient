@@ -1,36 +1,48 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from "@angular/common/http";
-import { Observable, exhaustMap, retry, take } from "rxjs";
-import { UserauthService } from "./userauth.service";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { catchError, exhaustMap, switchMap, take } from "rxjs/operators";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { LoginService } from "./loginservice";
 import { LocalStorageService } from "./local-storage.service";
 import { UserModel } from "../model/user.model";
 
-
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor{
-   
-    constructor(private authService:UserauthService,
-    private localStorageService:LocalStorageService
-    ){}
+export class AuthInterceptor implements HttpInterceptor {
 
-    intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-      // Local storage'dan kullanıcı bilgilerini al
-    const currentUser = this.localStorageService.getItem("User")
-        console.log("Şimdi ki kullanıcı: " + currentUser)
-       // Kullanıcı var ve token mevcutsa isteğe ekle
-       
-    if (currentUser && currentUser.token) {
-        req = req.clone({
-          setHeaders: {
-            Authorization: `Bearer ${currentUser.token}`
-          }
-        });
-      }
-  
-      // İsteği bir sonraki handler'a ilet
-      return next.handle(req);
+    constructor(
+        private localService: LocalStorageService,
+        private router: Router,
+        private snackBar: MatSnackBar
+    ) {}
 
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const token = this.localService.getItem("User");
+
+        if (token && token.token) {
+            req = this.addToken(req, token.token);
+        }
+     
+        return next.handle(req).pipe(
+            catchError((error: HttpErrorResponse) => {
+                if (error.status === 401) {
+                    this.snackBar.open('Yetkilendirme hatası: Lütfen giriş yapın.', '', {
+                        duration: 3000,
+                    });
+                    this.router.navigate(["/login"]);
+                }
+                return throwError(() => new Error(error.message || 'Sunucu hatası!'));
+            })
+        );
     }
 
+    private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
+        return req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    }
 }

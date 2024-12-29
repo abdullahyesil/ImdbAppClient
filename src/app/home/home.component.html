@@ -36,7 +36,7 @@
     </button>
   </div> -->
 
-        <div id="carouselExampleCaptions" class="carousel slide">
+        <div *ngIf="homePageSettings && homePageSettings.carousel" id="carouselExampleCaptions" class="carousel slide">
           <div class="carousel-indicators">
             <button *ngFor="let item of movieModel; let i = index" type="button"
               data-bs-target="#carouselExampleCaptions" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
@@ -51,7 +51,7 @@
                     src="{{item.imageUrl}}"
                     class="img-fluid img border foto"> </a>
                 <div class="text-content">
-                  <a routerLink="/movies/{{item.id}}" class="text-decoration-none text-white" href="#">
+                  <a routerLink="/movies/{{item.id}}" class="text-decoration-none text-white">
                     <h5>{{item.movieName}}
                     </h5>
                   </a>
@@ -80,11 +80,9 @@
     </div>
 
     <div class="col-md-3">
-
       <div>
         <h6 class="text-center mt-3 baslik">Kategoriler</h6>
         <div class="label-box p-4">
-
           <span class="label label-primary">Aksiyon</span>
           <span class="label label-secondary">Macera</span>
           <span class="label label-success">Komedi</span>
@@ -95,7 +93,6 @@
       <!-- Yıllara göre-->
       <p class="text-center baslik mt-3"><b>Yıllara Göre En İyi Filmler</b></p>
       <div class="label-box p-4">
-
         <div class="list-group">
           <div class="row">
             <a href="#" class="list-group-item  item-action">
@@ -104,7 +101,6 @@
             <a href="#" class="list-group-item item-action">
               2023
             </a>
-
             <a href="#" class="list-group-item  item-action">
               2022
             </a>
@@ -129,13 +125,11 @@
             </label>
           </div>
           <button (click)="oyVer()" class="btn btn-primary mt-1">Oy Ver</button>
-
         </div>
       </div>
       <h6 class="text-center baslik  mt-3"><b>Bizi Sosyal Medyada Takip Et</b></h6>
       <!-- Bizi takip et-->
       <div *ngIf="SocialDto" class="label-box p-4">
-
         <div class="social-icons mt-3">
           <a href="{{SocialDto.facebook}}" class="social-icon list-item">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 48 48">

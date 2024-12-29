@@ -24,4 +24,15 @@ color: #EDEDED;
 .form-control{
     width: 25rem;
 }
+.icon{
+    font-size: 50;
+}
+::ng-deep .mat-mdc-menu-content{
+    background-color: #F73859;
+   
+}
+::ng-deep .mat-mdc-menu-item-text{
+
+    color:white;
+}
 

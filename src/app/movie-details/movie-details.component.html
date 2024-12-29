@@ -15,16 +15,15 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerpolicy="strict-origin-when-cross-origin" 
                 allowfullscreen></iframe>
-
                      <!-- Like & Dislike Buttons -->
                      <div class="like-dislike-container">
-                    <img *ngIf="!likeActive" class="" src="/assets/icons/like.png" (click)="likeVideo()">
-                    <img *ngIf="likeActive" class="" src="/assets/icons/liked.png" (click)="likeVideo()">
-                    <img *ngIf="!dislikeActive" class="m-2" src="/assets/icons/dislike.png" (click)="dislikeVideo()">
-                    <img *ngIf="dislikeActive" class="m-2" src="/assets/icons/disliked.png" (click)="dislikeVideo()">
+                    <img *ngIf="!likeActive" class="hand" src="/assets/icons/like.png" (click)="likeVideo()">
+                    <img *ngIf="likeActive" class="hand" src="/assets/icons/liked.png" (click)="likeVideo()">
+                    <img *ngIf="!dislikeActive" class="hand m-2" src="/assets/icons/dislike.png" (click)="dislikeVideo()">
+                    <img *ngIf="dislikeActive" class="hand m-2" src="/assets/icons/disliked.png" (click)="dislikeVideo()">
                        veya istersen <label class="hand" (click)="scrollToYorumYap()" ><b>Yorum yap</b></label>
+                       <p-progressBar class="" [value]="likesYuzdesi" />
                     </div>
-
                 <div class="card-body">
                     <h1 class="card-title">
                         {{movie.movieName}}
@@ -51,34 +50,38 @@
       </div>
 </div>
 
-
-
 <ng-template #no_Actor>
     <div class="alert alert-warning">Oyuncu Bulunamadı</div>
 </ng-template>
 </div>
 
-
-
 <ng-template #no_movie>
     <div class="alert alert-warning">Film Bulunamadı</div>
 </ng-template>
 <hr>
-<div id="yorumYap" class="mt-4">
+<div *ngIf="isLogin()" id="yorumYap" class="mt-4">
     <!-- Yorum alanınız burada -->
     <h2>Yorum Yap</h2>
-    <textarea class="form-control" rows="4" placeholder="Yorumunuzu buraya yazın..."></textarea>
-    <button class="btn btn-primary mt-2">Gönder</button>
+    <textarea #content class="form-control" rows="4" placeholder="Yorumunuzu buraya yazın..."></textarea>
+    <button (click)="addComment(content, movie.id)" class="btn btn-primary mt-2">Gönder</button>
 </div>
-
-<div id="yorumlar" class="mt-5">
+<label *ngIf="!!commentHata" class="text-danger">{{commentHata}}</label>
+<div *ngIf="yorumlar.length > 0; else no_comment" id="yorumlar" class="mt-5">
     <h2>Yorumlar</h2>
     <div class="card mb-3" *ngFor="let yorum of yorumlar">
         <div class="card-body">
-            <h5 class="card-title">{{yorum.kullaniciAdi}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{yorum.tarih | date:'medium'}}</h6>
-            <p class="card-text">{{yorum.metin}}</p>
+            <h5 class="card-title">{{yorum.userName}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{yorum.commentedOn| date:'medium'}}</h6>
+            <p class="card-text">{{yorum.content}}</p>
         </div>
     </div>
 </div>
+<div *ngIf="yorumlar.length > 0 && this.size < totalCount">
+<button (click)="loadMore()" class="btn btn-outline-warning">Daha fazla yükle</button>
+
+</div>
+<ng-template #no_comment>
+    <div class="alert alert-warning">Daha önce hiç yorum atılmamış</div>
+</ng-template>
+
 </div>

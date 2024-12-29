@@ -4,6 +4,7 @@ import { SiteSettings } from '../model/site-settings';
 import { Observable, of } from 'rxjs';
 import { homePageSettings } from '../model/entities/homePageSettings';
 import { imdbStoryModel } from '../model/entities/imdbStory';
+import { responseMessage } from '../model/responseMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class AdminService {
   ) { }
 
 
-  updateSiteSettings(model:SiteSettings){
-   return this.http.put(this.url+ "Settings/", model)
+  updateSiteSettings(model:SiteSettings):Observable<responseMessage>{
+   return this.http.put<responseMessage>(this.url+ "Settings/", model)
   }
 
   getSiteSettings():Observable<SiteSettings>{

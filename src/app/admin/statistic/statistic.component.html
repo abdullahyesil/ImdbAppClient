@@ -1,13 +1,13 @@
-<div class=" bg-dark container container-statistic m-2">
+<div *ngIf="statisticModel" class=" bg-dark container container-statistic m-2">
     <h2>Üye İstatistikleri</h2>
     <div class="statistic">
-      <p><strong>Toplam Üye Sayısı:</strong> {{movies?.length || 0}} //filmsayısı </p>
+      <p><strong>Toplam Üye Sayısı:</strong> {{statisticModel.regUserTotalCount}} </p>
     </div>
     <div class="statistic">
-      <p><strong>Toplam Film Sayısı:</strong>  {{movies?.length || 0}} </p>
+      <p><strong>Toplam Film Sayısı:</strong>  {{statisticModel.movieTotalCount}}</p>
     </div>
     <div class="statistic">
-      <p><strong>Toplam Oy Sayısı:</strong>  {{voteStatistic?.length || 0}} </p>
+      <p><strong>Toplam Oy Sayısı:</strong>  {{statisticModel.ofVotesTotalCount}} </p>
     </div>
   </div>
 
@@ -22,16 +22,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of voteStatistic">
-          <td> {{item.rate_id}}</td>
-          <td>  {{ getFilmName(item.movie_id) }}</td>
-          <td>{{item.user_id === 0 ? 'Ziyaretçi' : item.user_id }}</td>
-          <td>{{ item.rate }}</td>
+        <tr *ngFor="let item of statisticModel.statistics">
+          <td> {{item.oyId}}</td>
+          <td> {{item.movieName}}</td>
+          <td>{{item.userName}}</td>
+          <td>{{ item.useVote}}</td>
         </tr>
         <!-- <tr *ngIf="voteStatistic.length == 0">
           <td colspan="4" class="text-center">Listelenecek oy bulunamadı.</td>
         </tr> -->
       </tbody>
     </table>
+    <p-paginator 
+    (onPageChange)="onPageChange()" 
+    [first]="page"
+    [rows]="size" 
+    [totalRecords]="statisticModel.ofVotesTotalCount" 
+    [rowsPerPageOptions]="[10, 20, 30]" />
 
   

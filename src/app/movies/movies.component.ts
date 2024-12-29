@@ -4,12 +4,13 @@ import localeTr from '@angular/common/locales/tr';
 import { registerLocaleData } from '@angular/common';
 import { AlertifyServiceService } from '../services/alertify-service.service';
 import { MovieService } from '../services/movie.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MyListComponent } from './my-list/my-list.component';
 import { VoteComponent } from './vote/vote.component';
 import { PaginatorState } from 'primeng/paginator';
+
 
 @Component({
   selector: 'app-movies',
@@ -35,10 +36,21 @@ pageIndex:number = 0;
   constructor(
     public alertify: AlertifyServiceService,
     private movieService: MovieService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router:Router
   ) {
     registerLocaleData(localeTr);
   }
+
+
+gonder(movie:MoviesModel){
+
+  this.router.navigate(['/movies', encodeURIComponent(movie.movieName)], {
+    queryParams: { id: movie.id }
+  });
+
+  
+}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {

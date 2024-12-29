@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { SiteSettings } from '../../model/site-settings';
+import { AlertifyServiceService } from '../../services/alertify-service.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +11,8 @@ import { SiteSettings } from '../../model/site-settings';
 export class SettingsComponent implements OnInit {
 
 constructor(
-  private AdminService:AdminService
+  private AdminService:AdminService,
+  private aletifyService:AlertifyServiceService
 ) {
   
 }  
@@ -49,7 +51,17 @@ constructor(
 
   saveSettings() {
  
-    this.AdminService.updateSiteSettings(this.siteSettings).subscribe(resp=> console.log(resp))
-    console.log('Settings saved:', this.siteSettings);
+    this.AdminService.updateSiteSettings(this.siteSettings).subscribe(resp=> 
+{
+  if(resp.isSucceed == true)
+  { 
+    this.aletifyService.succes(resp.message)
+  }
+  else {
+    this.aletifyService.warning(resp.message)
+  }
+}
+    )
+
   }
 }

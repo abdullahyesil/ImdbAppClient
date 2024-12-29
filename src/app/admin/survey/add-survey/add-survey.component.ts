@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SurveyService } from '../../../services/survey.service';
+import { AlertifyServiceService } from '../../../services/alertify-service.service';
+import { title } from 'process';
 
 @Component({
   selector: 'app-add-survey',
@@ -12,7 +14,8 @@ export class AddSurveyComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private surveyService:SurveyService
+    private surveyService:SurveyService,
+    private alertifyService:AlertifyServiceService
   ) {
     this.surveyForm = this.fb.group({
       title: ['', Validators.required],
@@ -45,9 +48,23 @@ export class AddSurveyComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.surveyForm.patchValue({
+      createdDate: new Date().toISOString()
+    });
+
     if (this.surveyForm.valid) {
       console.log(this.surveyForm.value);
-      this.surveyService.createSurvey(this.surveyForm.value).subscribe(resp => console.log(resp) );
+      this.surveyService.createSurvey(this.surveyForm.value).subscribe(resp => 
+        { if(resp.isSucceed)
+         { this.alertifyService.succes(resp.message)
+           
+           this.surveyForm.get('title')?.reset('');
+           this.options.controls.forEach(option => {
+             option.get('optionText')?.reset('');
+           });
+         }
+        }
+       );
     }
   }
 }

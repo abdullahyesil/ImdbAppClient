@@ -10,7 +10,7 @@ import { CategoryComponent } from './category/category.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OzetPipe } from './pipes/ozet.pipe';
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AlertifyServiceService } from './services/alertify-service.service';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -18,19 +18,23 @@ import { AddMoviesComponent } from './admin/add-movies/add-movies.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MyListComponent } from './movies/my-list/my-list.component';
 import { VoteComponent } from './movies/vote/vote.component';
-import { AuthService } from './services/auth.service';
 import { MenuComponent } from './admin/menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { LoadingComponent } from './other/loading/loading.component';
 import { AuthComponent } from './user/auth/auth.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MetaKeyComponent } from './meta-key/meta-key.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { PaginatorModule } from 'primeng/paginator';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import { LoginService } from './services/loginservice';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { AuthInterceptor } from './services/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,8 +59,11 @@ import { PaginatorModule } from 'primeng/paginator';
     FormsModule,
     MatDialogModule,
     MatButtonToggleModule,
-    PaginatorModule
-   
+    PaginatorModule,
+    MatButtonModule,
+    MatMenuModule,
+    ProgressBarModule,
+    HttpClientModule
 
   ],
   providers: [
@@ -67,7 +74,7 @@ import { PaginatorModule } from 'primeng/paginator';
     AlertifyServiceService,
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    AuthService
+    LoginService
   ]
   ,
   bootstrap: [AppComponent]

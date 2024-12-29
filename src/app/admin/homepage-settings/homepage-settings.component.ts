@@ -25,13 +25,17 @@ export class HomepageSettingsComponent implements OnInit {
   surveyId: number | null = null;
   selectedSurveyId: number | null = null;
   selectedStoryIds: number[] = [];
-  survey: SurveysModel[];
+  survey: SurveysModel[] = [];
   movieModel: MoviesModel[];
   selectedMovies: MoviesModel[] = [];
   pageIndex: number = 0;
   size: number = 5;
+  Surveysize: number = 6;
   settingsForm: FormGroup;
   imdbStoryModel:imdbStoryModel[] = []
+  page:number= 0
+  surveysTotalCount:number = 0
+
 readonly dialog = inject(MatDialog)
   constructor(
     private surveyService: SurveyService,
@@ -81,8 +85,21 @@ readonly dialog = inject(MatDialog)
 
       this.toggleFormFields(); // Form alanlarını etkinleştir veya devre dışı bırak
     });
+this.loadSurveys(this.page, this.Surveysize)
+  }
 
-    this.surveyService.getAll().subscribe(resp => (this.survey = resp));
+
+  loadMoreSurveys(){
+    this.Surveysize = this.Surveysize+ this.Surveysize
+    this.loadSurveys(this.page, this.Surveysize)
+  }
+
+  loadSurveys(page:number, size:number){
+    this.surveyService.getAll(page, size).subscribe(resp => {
+      this.survey = resp.surveys
+      this.surveysTotalCount = resp.totalCount
+    });
+    
   }
 
   updateCarouselIds(): void {

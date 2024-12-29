@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'movies', component: MoviesComponent},
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path:'movies/category/:id', component:MoviesComponent},
-  {path:'movies/:id', component:MovieDetailsComponent},
+  {path:'movies/::name', component:MovieDetailsComponent},
   {path:'auth' , component:AuthComponent},
   {path:'home', component:HomeComponent},
   {path:'about', component:AboutComponent},

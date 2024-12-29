@@ -3,6 +3,8 @@ import { OtherService } from '../../services/other.service';
 import { voteInfoModel } from '../../model/voteInfo.model';
 import { MoviesModel } from '../../model/entities/movies.model';
 import { MovieService } from '../../services/movie.service';
+import { StatisticModel } from '../../model/entities/statistic';
+import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-statistic',
@@ -11,41 +13,46 @@ import { MovieService } from '../../services/movie.service';
 })
 export class StatisticComponent implements OnInit {
 
-  voteStatistic:voteInfoModel[] = null;
-  movies: MoviesModel[] = null;
-  moviesMap: { [key: number]: any } = {}; 
-  
+
+onPageChange() {
+this.page = this.page+1
+this.loadStatistic(this.page, this.size)
+
+}
+
+  statisticModel:StatisticModel = {
+    movieTotalCount: 0,
+    regUserTotalCount: 0,
+    ofVotesTotalCount:0,
+    statistics:[{
+      oyId:0,
+      movieName:"",
+      userName:"",
+      useVote:0,
+    }]
+  }
+  page:number=0
+  size:number=20
+
   constructor(
-    private voteService: OtherService,
-    private movieService: MovieService
+    private otherService:OtherService
   ){
+    this.loadStatistic(this.page,this.size)
   }
 
   ngOnInit(): void {
-    this.voteService.getVotedAdmin().subscribe(data => {
-      this.voteStatistic = data;});
-
-      this.movieService.getMovies(null).subscribe(data => {
-     this.movies=data;
-     this.createMoviesMap();
-      });
-
       
+   
+  }
+
+  loadStatistic(page:number,size:number){
+    this.otherService.getStatistic(page,size).subscribe(resp=> 
+      this.statisticModel = resp
+      )
   }
   
-  // Filmleri movie_id ile eşleştirmek için bir map oluşturuyoruz
-createMoviesMap(): void {
-  this.moviesMap = {};
-  this.movies.forEach(movie => {
-    this.moviesMap[movie.id] = movie;
-  });
-}
 
-// Filmin adını movie_id'ye göre almak için bir yardımcı yöntem
-getFilmName(movieId: number): string {
-  const movie = this.moviesMap[movieId];
-  return movie ? movie.movieName : 'Bilinmeyen Film';
-}
+
   
 
 }
